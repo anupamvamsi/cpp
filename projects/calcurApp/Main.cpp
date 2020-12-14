@@ -22,7 +22,45 @@
     #include <ctime>    // for rand num gen
 */
 
-void play_game()
+int player_choice();
+int prng();
+int guesser(int);
+void play_game();
+
+int _random_num = prng();
+
+int main() // Run/Start the game
+{
+    play_game();
+}
+
+int player_choice()
+{   
+    std::cout << "\nDo you wanna build a snowmannn?!\n";
+    std::cout << "0. Nope, I don't!" << std::endl << "1. YES, YES, YES!" << "\n\n";
+
+    int input;
+    std::cin >> input;
+    
+    switch (input)
+    {
+        case 0: // Nope I don't
+            std::cout << "Aw.\n";
+            return -1;    
+        
+        case 1: // YES YES YES
+            std::cout << "You want to play, yay!\n";
+            return 0;
+            
+        default: // Ugh, what?
+            std::cout << "Enter a valid input, 0 or 1!\n";
+            return -2;
+    }
+
+    return -1;
+}
+
+int prng() // Psuedo-random Number Generator
 {
     // Random Number Generation:
     /* Tried using random_device for seeding the random function
@@ -32,39 +70,59 @@ void play_game()
     std::mt19937_64 mt;
     mt.seed(std::time(0)); // Using ctime for seed - was unable to figure out how to use random_device for non-repetitive o/p
 
-    std::uniform_int_distribution<uint64_t> dist(0, 250); // Both 0 and 100 are inclusive
+    std::uniform_int_distribution<uint64_t> dist(0, 100); // Both 0 and 100 are inclusive
 
-    int random_num = dist(mt);  // Storing the random num
+    _random_num = dist(mt);  // Storing the random num
     
-    std::cout << "Random number is...\n" << random_num << "!\n";
-    std::cin.get(); // Wait for Enter/Return key
-
-    std::cout << "Game is starting... Please wait...\n";
+    return _random_num;
+    // std::cout << "Game is starting... Please wait...\n";
 }
 
-int main()
+int guesser(int _random_num) // Guesser logic
 {
-    int input;
+    int guess;
+
+    std::cout << "Guess a number between 0 and 100!: \n";
+    std::cout << "(Psst! The random number lies between " << _random_num - 1 << " and " << _random_num + 1 << "!)\n";
+    std::cin >> guess;
+
+    // If input is a string, program exits
+    if (guess == _random_num)
+    {
+        std::cout << "Correct guess! Congratulations!\n";
+        return -1;
+    }
+    else if (guess > _random_num)
+    {
+        std::cout << "Too high! Guess again!\n";
+        return 0;
+    }
+    else
+    {
+        std::cout << "Too low! Guess again!\n";
+        return 0;
+    }
+}
+
+void play_game() // Keep playing
+{
+    int flag1, flag2;
+    // flag1 = player_choice();
     do
     {
-        std::cout << "\nDo you wanna build a snowmannn?!\n";
-        std::cout << "0. Nope, I don't!" << std::endl << "1. YES, YES, YES!" << "\n\n";
-        std::cin >> input;
-
-        switch (input)
-        {
-        case 0: // Nope I don't
-            std::cout << "Aw.\n";
-            return 0;            
-        
-        case 1: // YES YES YES
-            std::cout << "You want to play, yay!\n";
-            play_game();
-            break;
+        flag1 = player_choice();
+        if (flag1 == -1)    // Input is 0
+            break;  // exit game
+        else if (flag1 == -2)   // Invalid input is entered
+        {   
+            while (flag1 == -2) // If invalid input continues
+                flag1 = player_choice();
+                if (flag1 == -1) // Input is 0
+                    break; // exit game
+            flag2 = guesser(_random_num);
+        }
+        else
+            flag2 = guesser(_random_num); // Don't call prng() again since new random num would be generated
             
-        default: // Ugh, what?
-            std::cout << "Enter a valid input, 0 or 1!\n";
-            break;
-        } 
-    } while(input != 1); // Infinite loop starts if strings are given as input - need to fix
+    } while(flag2 != -1); // Infinite loop starts if strings are given as input - need to fix // IS FIXED    
 }
