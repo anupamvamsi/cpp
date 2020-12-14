@@ -1,3 +1,7 @@
+    // Code written from using https://www.daniweb.com/programming/software-development/threads/321321/heads-and-tails-game as a reference.
+    // Compile: "g++ -o heads_tails.exe heads_tails.cpp"
+    // Run    : "./heads_tails.exe"
+    
     #include <iostream>
     #include <ctime>
     #include <cstdlib> // for srand
