@@ -1,6 +1,7 @@
 // Building this app based on the Cpp tutorials by Caleb Curry on YT.
 // Find the playlist here: https://www.youtube.com/playlist?list=PL_c9BZzLwBRJVJsIfe97ey45V4LP_HXiG
 #include <iostream>
+#include <vector>
 #include <random>
 #include <ctime>
 
@@ -32,13 +33,13 @@ int prng() // Pseudo-random Number Generator
     return random_num;
 }
 
-void print_guesses(int guesses[], int count)
+void print_vector(std::vector<int> guesses)
 {
-    if (count > 1)
+    if (guesses.size() > 1)
     {
         std::cout << "Your guesses are: \n";
 
-        for (int i=0; i < count-1; i++) // "count-1" so that the last answer isn't printed
+        for (int i=0; i < guesses.size()-1; i++) // "count-1" so that the last answer isn't printed
             std::cout << "Guess " << i+1 << ": " << guesses[i] << std::endl;
         std::cout << "-----------------------------------------\n";
     }
@@ -46,15 +47,17 @@ void print_guesses(int guesses[], int count)
 
 void guesser(int random_num)
 {
-    int guess, guesses[101], count=0;
+    int guess;
+    std::vector<int> guesses;
+
     while (true)
     {
         std::cin >> guess;
-        guesses[count++] = guess;
+        guesses.push_back(guess);
 
         if (guess == random_num)
         {   
-            if (count == 1)
+            if (guesses.size() == 1)
             {
                 std::cout << "--------------------------------------------------------------\n";
                 std::cout << "Woo hoo! First try! ";
@@ -65,7 +68,7 @@ void guesser(int random_num)
             {
                 std::cout << "-----------------------------------------\n";
                 std::cout << guess << " is the correct guess! Congratulations!\nYou took ";
-                std::cout << count << " guesses!\n";
+                std::cout << guesses.size() << " guesses!\n";
                 std::cout << "-----------------------------------------\n";
             }
             break;
@@ -80,7 +83,7 @@ void guesser(int random_num)
         }
     }
 
-    print_guesses(guesses, count);
+    print_vector(guesses);
 }
 
 void play_game()
