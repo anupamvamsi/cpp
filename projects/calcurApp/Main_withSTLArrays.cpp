@@ -1,7 +1,7 @@
 // Building this app based on the Cpp tutorials by Caleb Curry on YT.
 // Find the playlist here: https://www.youtube.com/playlist?list=PL_c9BZzLwBRJVJsIfe97ey45V4LP_HXiG
 #include <iostream>
-#include <vector>
+#include <array>
 #include <random>
 #include <ctime>
 
@@ -33,13 +33,13 @@ int prng() // Pseudo-random Number Generator
     return random_num;
 }
 
-void print_vector(std::vector<int> guesses) // vector is passed by value
+void print_STL_Array(std::array<int, 6> guesses, int count) // array is passed by value // only allowing SIX guesses
 {
-    if (guesses.size() > 1)
+    if (count > 1)
     {
         std::cout << "Your guesses are: \n";
 
-        for (int i=0; i < guesses.size()-1; i++) // "count-1" so that the last answer isn't printed
+        for (int i=0; i < count-1; i++) // "count-1" so that the last answer isn't printed
             std::cout << "Guess " << i+1 << ": " << guesses[i] << std::endl;
         std::cout << "-----------------------------------------\n";
     }
@@ -47,17 +47,17 @@ void print_vector(std::vector<int> guesses) // vector is passed by value
 
 void guesser(int random_num)
 {
-    int guess;
-    std::vector<int> guesses;
+    int guess, count;
+    std::array<int, 6> guesses; // allowing ONLY 6 guesses
 
     while (true)
     {
         std::cin >> guess;
-        guesses.push_back(guess);
+        guesses[count++] = guess;
 
         if (guess == random_num)
         {   
-            if (guesses.size() == 1)
+            if (count == 1)
             {
                 std::cout << "--------------------------------------------------------------\n";
                 std::cout << "Woo hoo! First try! ";
@@ -68,7 +68,7 @@ void guesser(int random_num)
             {
                 std::cout << "-----------------------------------------\n";
                 std::cout << guess << " is the correct guess! Congratulations!\nYou took ";
-                std::cout << guesses.size() << " guesses!\n";
+                std::cout << count << " guesses!\n";
                 std::cout << "-----------------------------------------\n";
             }
             break;
@@ -83,7 +83,7 @@ void guesser(int random_num)
         }
     }
 
-    print_vector(guesses);
+    print_STL_Array(guesses, count);
 }
 
 void play_game()
