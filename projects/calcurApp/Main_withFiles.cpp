@@ -113,11 +113,9 @@ void print_high_score(int num_of_guesses)
     if (num_of_guesses < high_score) // comparing value in the file to num of guesses by the player
     {
         output << num_of_guesses;
-        
-        // std::ifstream file ("high_score.txt");
-        // file >> print_score;
+    
         std::cout << "DING DING DING! NEW HIGH SCORE! ONLY ";
-        // std::cout << input.rdbuf() ;
+        // figure out how to read and print the file content
         std::cout << " GUESSE(S)!\n";
 
     }
