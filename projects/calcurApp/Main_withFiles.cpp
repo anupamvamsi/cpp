@@ -43,7 +43,7 @@ void print_vector(std::vector<int> guesses) // vector is passed by value
 
 		for (int i=0; i < guesses.size()-1; i++) // "count-1" so that the last answer isn't printed
 			std::cout << "Guess " << i+1 << ": " << guesses[i] << std::endl;
-		std::cout << "-----------------------------------------\n";
+		std::cout << "--------------------------------------------------\n";
 	}
 }
 
@@ -88,7 +88,7 @@ std::vector<int> guesser(int random_num)
 	return guesses;
 }
 
-void print_high_score(int num_of_guesses)
+void print_high_score(int num_of_guesses) // uses files
 {
 	std::ifstream input ("high_score.txt");
 	
@@ -113,10 +113,17 @@ void print_high_score(int num_of_guesses)
 	if (num_of_guesses < high_score) // comparing value in the file to num of guesses by the player
 	{
 		output << num_of_guesses;
-	
+		output.close();
+		
+		std::ifstream printer ("high_score.txt");
+		int num;
+		printer >> num;
+
 		std::cout << "DING DING DING! NEW HIGH SCORE! ONLY ";
-		// figure out how to read and print the file content
+		std::cout << num; // I had to close the 'output' object for this statement to work
 		std::cout << " GUESSE(S)!\n";
+		std::cout << "--------------------------------------------------\n";
+		printer.close();
 	}
 	else // so that file contents don't get deleted
 		output << high_score;
