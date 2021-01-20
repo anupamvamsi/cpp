@@ -1,3 +1,33 @@
+/*
+
+// half hollow pyramid
+1
+12
+1 3
+1  4
+12345
+
+// inverted half hollow pyramid
+12345
+2  5
+3 5
+45
+5
+
+// full hollow pyramid
+Enter number: 5
+1
+12
+1 3
+1  4
+1   5
+1   5
+2  5
+3 5
+45
+5
+*/
+
 #include <iostream>
 
 int main() {
