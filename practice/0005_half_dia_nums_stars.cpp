@@ -1,3 +1,17 @@
+/*
+
+Enter number of rows 'N': 4
+1
+2*3
+4*5*6
+7*8*9*10
+7*8*9*10
+4*5*6
+2*3
+1
+
+*/
+
 #include <iostream>
 
 void FirstHalf(int& number, int number_of_rows);

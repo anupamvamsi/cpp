@@ -1,3 +1,15 @@
+/*
+
+Enter start number: 4
+Enter number of rows (till peak row): 3
+4
+55
+666
+55
+4
+
+*/
+
 #include <iostream>
 
 void FirstHalf(int& start, int num_rows);
