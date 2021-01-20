@@ -1,3 +1,28 @@
+/*
+
+// uncommented code
+Enter number of rows: 5
+1
+1 2 1
+1 2 3 2 1
+1 2 3 4 3 2 1
+1 2 3 4 5 4 3 2 1
+A
+A B A
+A B C B A
+A B C D C B A
+A B C D E D C B A
+
+// commented code
+Enter number of rows: 5
+1 1
+1 2 2 1
+1 2 3 3 2 1
+1 2 3 4 4 3 2 1
+1 2 3 4 5 5 4 3 2 1
+
+*/
+
 #include <iostream>
 
 int main() {
