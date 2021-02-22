@@ -34,8 +34,7 @@ int main() {
                 // destroyed!
   std::cout << (intptr_t)z << std::endl;
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
 }
 
 // Additional notes (learncpp.com):

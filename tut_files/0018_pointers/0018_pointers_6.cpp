@@ -36,7 +36,6 @@ int main() {
   std::cout << "Adr(0)\t: " << (intptr_t)vp << std::endl;
   // cout << *vp; Deref. not possible since vp is not pointing to any type
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }

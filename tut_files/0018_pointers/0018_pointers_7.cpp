@@ -69,6 +69,5 @@ int main() {
     ***B == B[0][0][0] == Value of First Row, First Array, First Element
   */
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
 }

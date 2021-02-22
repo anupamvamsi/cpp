@@ -49,6 +49,6 @@ int main() {
 
   delete[] arr;
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.ignore();
+  std::cin.get();
 }
