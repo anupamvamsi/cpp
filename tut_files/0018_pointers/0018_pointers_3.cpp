@@ -70,7 +70,6 @@ int main() {
   // delete the pointer array too!
   delete[] p_some_array_ptr;
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }

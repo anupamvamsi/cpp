@@ -15,8 +15,7 @@ int main() {
   std::cout << "p_locn0 = " << p_locn0 << std::endl;
   std::cout << "Difference = " << p_locn3 - p_locn0 << std::endl;
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }
 

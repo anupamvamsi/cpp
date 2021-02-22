@@ -22,8 +22,7 @@ int main() {
   // std::cout << "Difference = " << p_locn6 - p_locn0 << std::endl;
   // */
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }
 

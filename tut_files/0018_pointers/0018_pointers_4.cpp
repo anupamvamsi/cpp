@@ -42,7 +42,6 @@ int main() {
   // to get rid of vector's memory and it's size
   v_pointer_vector.clear();
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }

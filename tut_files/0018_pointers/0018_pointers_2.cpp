@@ -49,7 +49,6 @@ int main() {
   // overall array delete only deletes array of pointers!
   delete[] p_some_object_ptr_arr;
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }

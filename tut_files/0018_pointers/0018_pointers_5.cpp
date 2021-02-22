@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 int main() {
   struct s_BasicObject {
@@ -16,8 +17,8 @@ int main() {
 
   // Equivalent to:
   // // s_BasicObject* p_basic_obj1 = new s_BasicObject();
-  // std::shared_ptr<s_BasicObject> sp_basic_obj1 =
-  //     std::make_shared<s_BasicObject>();
+  std::shared_ptr<s_BasicObject> sp_basic_obj1 =
+      std::make_shared<s_BasicObject>();
 
   {  // Scope 1
     using namespace std;
@@ -42,7 +43,6 @@ int main() {
 
   }  // End Scope 1
 
-  std::cout << std::endl;
-  system("pause");
+  std::cin.get();
   return 0;
 }
