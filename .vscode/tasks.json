@@ -1,0 +1,51 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++.exe (v8.1) BUILD ACTIVE FILE",
+			"command": "C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: \"C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe\""
+		}
+		//,
+		// {
+		// 	"type": "cppbuild",
+		// 	"label": "C/C++: cl.exe MSVC COMPILER: BUILD ACTIVE FILE",
+		// 	"command": "cl.exe",
+		// 	"args": [ // compiler options
+		// 		"/Zi", // creates obj and pdb files?
+		// 		"/EHsc", // exception handling model
+		// 		"/Fe:", // name exe file
+		// 		"${fileDirname}\\${fileBasenameNoExtension}.exe",
+		// 		"${file}"
+		// 	],
+		// 	"options": {
+		// 		"cwd": "${workspaceFolder}"
+		// 	},
+		// 	"problemMatcher": [
+		// 		"$msCompile"
+		// 	],
+		// 	"group": {
+		// 		"kind": "build",
+		// 		"isDefault": true
+		// 	},
+		// 	"detail": "compiler: cl.exe"
+		// }
+	]
+}
