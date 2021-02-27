@@ -1,0 +1,35 @@
+// https://giovanni.codes/setup-sdl2-with-visual-studio-code-and-mingw64-on-windows/
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "SDL2 C/C++: g++.exe (v8.1) CUSTOM BUILD TASK",
+      "command": "C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-g",
+        "src\\*.cpp",
+        "-o",
+        "build\\particle_fire_simulation.exe",
+        "-IC:/dev/vs_code/libs/SDL/SDL2-2.0.14_dev_libs/x86_64-w64-mingw32/include",
+        "-LC:/dev/vs_code/libs/SDL/SDL2-2.0.14_dev_libs/x86_64-w64-mingw32/lib",
+        "-lmingw32",
+        "-lSDL2main",
+        "-lSDL2",
+        "-mwindows",
+        "-mconsole"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: \"C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe\""
+    }
+  ]
+}
