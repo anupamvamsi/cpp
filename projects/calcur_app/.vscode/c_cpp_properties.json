@@ -1,0 +1,59 @@
+{
+	"configurations": [
+		{
+			"name": "GCC",
+			"includePath": [
+				"${workspaceFolder}/**"
+			],
+			"defines": [
+				"_DEBUG",
+				"UNICODE",
+				"_UNICODE"
+			],
+			"windowsSdkVersion": "10.0.18362.0",
+			"compilerPath": "C:/Program Files/mingw-w64Latest/winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3/mingw64/bin/g++.exe",
+			"cStandard": "c17",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "gcc-x64",
+			"compilerArgs": [],
+			// "intelliSenseModeIsExplicit": true,
+			// "cStandardIsExplicit": true,
+			// "cppStandardIsExplicit": true,
+			// "compilerPathIsExplicit": true,
+			"browse": {
+				"path": [
+					"${workspaceFolder}/**"
+				],
+				"limitSymbolsToIncludedHeaders": true
+			}
+		},
+		{
+			"name": "Win32",
+			"includePath": [
+				"${workspaceFolder}/**"
+			],
+			"defines": [
+				"_DEBUG",
+				"UNICODE",
+				"_UNICODE"
+			],
+			"windowsSdkVersion": "10.0.18362.0",
+			"compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx64/x64/cl.exe",
+			"cStandard": "c17",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "msvc-x64",
+			"compilerArgs": [],
+			// "intelliSenseModeIsExplicit": true,
+			// "cStandardIsExplicit": true,
+			// "cppStandardIsExplicit": true,
+			// "compilerPathIsExplicit": true,
+			"browse": {
+				"path": [
+					"${workspaceFolder}/**"
+				],
+				"limitSymbolsToIncludedHeaders": true
+			}
+		}
+	],
+	"version": 4
+}
