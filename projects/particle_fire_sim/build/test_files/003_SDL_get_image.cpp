@@ -2,23 +2,18 @@
 
 #include <iostream>
 
-const int SCREEN_WIDTH = 625;
-const int SCREEN_HEIGHT = 190;
+const int SCREEN_WIDTH = 624;
+const int SCREEN_HEIGHT = 184;
 
-SDL_Window* window = NULL;
-SDL_Surface* screen_surface = NULL;
-SDL_Surface* hello_world = NULL;
-
-bool Initialize() {
+bool Initialize(SDL_Window*& window, SDL_Surface*& screen_surface) {
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cout << "Could not initialize SDL. SDL Error: " << SDL_GetError()
               << std::endl;
     return false;
   } else {
-    window =
-        SDL_CreateWindow("Particle Fire Explosion!", SDL_WINDOWPOS_CENTERED,
-                         SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT,
-                         SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow("SDL Image!", SDL_WINDOWPOS_CENTERED,
+                              SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
+                              SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
 
     if (window == NULL) {
       std::cout << "SDL Window could not be created. SDL Error: "
@@ -32,10 +27,10 @@ bool Initialize() {
   return true;
 }
 
-bool LoadMedia() {
-  hello_world = SDL_LoadBMP("build/test_files/hello_world.bmp");
+bool LoadMedia(SDL_Surface*& image) {
+  image = SDL_LoadBMP("build/test_files/hello_world.bmp");
 
-  if (hello_world == NULL) {
+  if (image == NULL) {
     std::cout << "Unable to load image. SDL Error: " << SDL_GetError()
               << std::endl;
     return false;
@@ -44,9 +39,9 @@ bool LoadMedia() {
   return true;
 }
 
-void Close() {
-  SDL_FreeSurface(hello_world);
-  hello_world = NULL;
+void Close(SDL_Window*& window, SDL_Surface*& image) {
+  SDL_FreeSurface(image);
+  image = NULL;
 
   SDL_DestroyWindow(window);
   window = NULL;
@@ -55,11 +50,14 @@ void Close() {
 }
 
 int main(int argc, char** argv) {
-  if (!Initialize()) {
+  SDL_Window* window = NULL;
+  SDL_Surface* screen_surface = NULL;
+  SDL_Surface* hello_world = NULL;
+
+  if (!Initialize(window, screen_surface)) {
     std::cout << "Failed to initialize." << std::endl;
   } else {
-    std::cout << window << std::endl;
-    if (!LoadMedia()) {
+    if (!LoadMedia(hello_world)) {
       std::cout << "Failed to load media." << std::endl;
     } else {
       SDL_BlitSurface(hello_world, NULL, screen_surface, NULL);
@@ -68,7 +66,7 @@ int main(int argc, char** argv) {
     }
   }
 
-  Close();
+  Close(window, hello_world);
 
   return 0;
 }
