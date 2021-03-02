@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
   SDL_Window* window = SDL_CreateWindow(
       "Particle Fire Explosion!", SDL_WINDOWPOS_CENTERED,
       SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-  if (window == NULL) {
+  if (window == nullptr) {
     std::cout << "SDL Window unable to initialize. SDL Error: "
               << SDL_GetError() << std::endl;
   }
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
   // Renderer
   SDL_Renderer* renderer =
       SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  if (renderer == NULL) {  // bug was here, doing assignment instead of "=="
+  if (renderer == nullptr) {  // bug was here, doing assignment instead of "=="
     std::cout << "Could not create the renderer." << std::endl;
   }
 
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
   SDL_Texture* texture =
       SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
                         SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
-  if (texture == NULL) {  // bug was here, doing assignment instead of "=="
+  if (texture == nullptr) {  // bug was here, doing assignment instead of "=="
     std::cout << "Could not create the texture." << std::endl;
   }
 
@@ -54,9 +54,9 @@ int main(int argc, char** argv) {
   }
 
   // Pitch = The number of bytes b/w rows of pixel data (w x sizeof(Uint32))
-  SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
+  SDL_UpdateTexture(texture, nullptr, buffer, SCREEN_WIDTH * sizeof(Uint32));
   SDL_RenderClear(renderer);
-  SDL_RenderCopy(renderer, texture, NULL, NULL);
+  SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   SDL_RenderPresent(renderer);
 
   bool quit = false;

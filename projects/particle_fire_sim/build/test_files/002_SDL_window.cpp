@@ -6,9 +6,9 @@ const int SCREEN_WIDTH = 900;
 const int SCREEN_HEIGHT = 600;
 
 int main(int argc, char** argv) {
-  SDL_Window* window = NULL;
+  SDL_Window* window = nullptr;
 
-  SDL_Surface* screen_surface = NULL;
+  SDL_Surface* screen_surface = nullptr;
 
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cout << "SDL could not initialize. SDL Error: " << SDL_GetError()
@@ -18,13 +18,13 @@ int main(int argc, char** argv) {
                               SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-    if (window == NULL) {
+    if (window == nullptr) {
       // std::cout << "Could not create window: SDL Error: " << SDL_GetError()
       // << std::endl;
       printf("Could not create window: SDL Error: %s", SDL_GetError());
     } else {
       screen_surface = SDL_GetWindowSurface(window);
-      SDL_FillRect(screen_surface, NULL,
+      SDL_FillRect(screen_surface, nullptr,
                    SDL_MapRGB(screen_surface->format, 0xCC, 0xBB, 0xEE));
 
       SDL_UpdateWindowSurface(window);

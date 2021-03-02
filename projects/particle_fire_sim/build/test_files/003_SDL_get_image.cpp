@@ -15,7 +15,7 @@ bool Initialize(SDL_Window*& window, SDL_Surface*& screen_surface) {
                               SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
                               SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
 
-    if (window == NULL) {
+    if (window == nullptr) {
       std::cout << "SDL Window could not be created. SDL Error: "
                 << SDL_GetError() << std::endl;
       return false;
@@ -30,7 +30,7 @@ bool Initialize(SDL_Window*& window, SDL_Surface*& screen_surface) {
 bool LoadMedia(SDL_Surface*& image) {
   image = SDL_LoadBMP("build/test_files/hello_world.bmp");
 
-  if (image == NULL) {
+  if (image == nullptr) {
     std::cout << "Unable to load image. SDL Error: " << SDL_GetError()
               << std::endl;
     return false;
@@ -41,18 +41,18 @@ bool LoadMedia(SDL_Surface*& image) {
 
 void Close(SDL_Window*& window, SDL_Surface*& image) {
   SDL_FreeSurface(image);
-  image = NULL;
+  image = nullptr;
 
   SDL_DestroyWindow(window);
-  window = NULL;
+  window = nullptr;
 
   SDL_Quit();
 }
 
 int main(int argc, char** argv) {
-  SDL_Window* window = NULL;
-  SDL_Surface* screen_surface = NULL;
-  SDL_Surface* hello_world = NULL;
+  SDL_Window* window = nullptr;
+  SDL_Surface* screen_surface = nullptr;
+  SDL_Surface* hello_world = nullptr;
 
   if (!Initialize(window, screen_surface)) {
     std::cout << "Failed to initialize." << std::endl;
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
     if (!LoadMedia(hello_world)) {
       std::cout << "Failed to load media." << std::endl;
     } else {
-      SDL_BlitSurface(hello_world, NULL, screen_surface, NULL);
+      SDL_BlitSurface(hello_world, nullptr, screen_surface, nullptr);
       SDL_UpdateWindowSurface(window);
       SDL_Delay(5000);
     }
