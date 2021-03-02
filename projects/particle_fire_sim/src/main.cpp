@@ -46,6 +46,13 @@ int main(int argc, char** argv) {
   // Set the memory of the buffer
   memset(buffer, 0x128, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
 
+  // Setting an individual pixel
+  // buffer[30000] = 0xFFBACDEE;
+
+  for (int i{0}; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
+    buffer[i] = 0xFF00FF00;
+  }
+
   // Pitch = The number of bytes b/w rows of pixel data (w x sizeof(Uint32))
   SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));
   SDL_RenderClear(renderer);
