@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
   // Renderer
   SDL_Renderer* renderer =
       SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  if (renderer = NULL) {  // bug is here, doing assignment instead of "=="
+  if (renderer == NULL) {  // bug was here, doing assignment instead of "=="
     std::cout << "Could not create the renderer." << std::endl;
   }
 
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
   SDL_Texture* texture =
       SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
                         SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
-  if (texture = NULL) {  // bug is here, doing assignment instead of "=="
+  if (texture == NULL) {  // bug was here, doing assignment instead of "=="
     std::cout << "Could not create the texture." << std::endl;
   }
 
