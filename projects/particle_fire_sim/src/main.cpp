@@ -2,81 +2,22 @@
 
 #include <iostream>
 
+#include "Screen.hpp"
+
 int main(int argc, char** argv) {
-  const int SCREEN_WIDTH = 800;
-  const int SCREEN_HEIGHT = 600;
+  pfe::Screen screen1;
 
-  // Init
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    std::cout << "SDL Init failed." << std::endl;
+  if (screen1.Init() == false) {
+    std::cout << "Error initializing Screen object." << std::endl;
   }
 
-  // Window
-  SDL_Window* window = SDL_CreateWindow(
-      "Particle Fire Explosion!", SDL_WINDOWPOS_CENTERED,
-      SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-  if (window == nullptr) {
-    std::cout << "SDL Window unable to initialize. SDL Error: "
-              << SDL_GetError() << std::endl;
-  }
-
-  // Renderer
-  SDL_Renderer* renderer =
-      SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  if (renderer == nullptr) {  // bug was here, doing assignment instead of "=="
-    std::cout << "Could not create the renderer." << std::endl;
-  }
-
-  // Texture
-  SDL_Texture* texture =
-      SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
-                        SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
-  if (texture == nullptr) {  // bug was here, doing assignment instead of "=="
-    std::cout << "Could not create the texture." << std::endl;
-  }
-
-  // Array of screen pixels stored in a buffer (w x h)
-  Uint32* buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
-  /*
-    ADD AN EXCEPTION FOR ERROR HANDLING
-    IN THE CASE MEMORY ALLOCATION
-    THROUGH "new" ISN'T WORKING.
-  */
-
-  // Set the memory of the buffer
-  memset(buffer, 0x128, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
-
-  // Setting an individual pixel
-  // buffer[30000] = 0xFFBACDEE;
-
-  for (int i{0}; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
-    buffer[i] = 0xFF00FF00;
-  }
-
-  // Pitch = The number of bytes b/w rows of pixel data (w x sizeof(Uint32))
-  SDL_UpdateTexture(texture, nullptr, buffer, SCREEN_WIDTH * sizeof(Uint32));
-  SDL_RenderClear(renderer);
-  SDL_RenderCopy(renderer, texture, nullptr, nullptr);
-  SDL_RenderPresent(renderer);
-
-  bool quit = false;
-
-  // Event
-  SDL_Event event;
-
-  while (!quit) {
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT) {
-        quit = true;
-      }
+  while (true) {
+    if (screen1.ProcessEvent() == false) {
+      break;
     }
   }
 
-  delete[] buffer;
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyTexture(texture);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
+  screen1.Close();
 
   return 0;
 }
