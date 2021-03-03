@@ -62,17 +62,38 @@ bool Screen::Init() {
   memset(m_buffer, 0x128, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
 
   for (int i{0}; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
-    m_buffer[i] = 0xFFFF0000;  // set each pixel
+    m_buffer[i] = 0x00000000;  // set each pixel
   }
 
+  return success;
+}
+
+void Screen::UpdateScreen() {
   // Pitch = The number of bytes b/w rows of pixel data (w x sizeof(Uint32))
   SDL_UpdateTexture(m_texture, nullptr, m_buffer,
                     SCREEN_WIDTH * sizeof(Uint32));
   SDL_RenderClear(m_renderer);
   SDL_RenderCopy(m_renderer, m_texture, nullptr, nullptr);
   SDL_RenderPresent(m_renderer);
+}
 
-  return success;
+void Screen::SetPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue,
+                      Uint8 alpha) {
+  Uint32 color = 0;
+
+  color += red;
+  color <<= 8;
+
+  color += green;
+  color <<= 8;
+
+  color += blue;
+  color <<= 8;
+
+  color += alpha;  // controls transparency
+
+  // Update the colors buffer
+  m_buffer[(y * SCREEN_WIDTH) + x] = color;
 }
 
 bool Screen::ProcessEvent() {

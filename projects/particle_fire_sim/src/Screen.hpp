@@ -19,6 +19,8 @@ class Screen {
  public:  // methods
   Screen();
   bool Init();
+  void UpdateScreen();
+  void SetPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
   bool ProcessEvent();
   void Close();
 };
