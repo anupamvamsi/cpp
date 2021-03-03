@@ -17,7 +17,7 @@ class Particle {
   Particle();
   virtual ~Particle();
 
-  void UpdateParticlePos();
+  void UpdateParticlePos(int time_interval);
 };
 
 }  // namespace pfe

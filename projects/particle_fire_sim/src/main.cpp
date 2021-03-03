@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     int elapsed = SDL_GetTicks();
 
     screen1.Clear();
-    swarm1.UpdateSwarmPos();
+    swarm1.UpdateSwarmPos(elapsed);
 
     unsigned char red_p = (1 + cos(elapsed * 0.001)) * 128;
     unsigned char green = (1 + sin(elapsed * 0.002)) * 128;

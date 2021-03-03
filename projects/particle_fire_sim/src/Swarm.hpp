@@ -11,13 +11,14 @@ class Swarm {
 
  public:
   static const int N_PARTICLES = 5000;
+  int last_time;
 
  public:
   Swarm();
   virtual ~Swarm();
 
   const Particle* const GetParticles() { return m_ptr_arr_to_Particle_Objects; }
-  void UpdateSwarmPos();
+  void UpdateSwarmPos(int elapsed);
 };
 
 }  // namespace pfe
