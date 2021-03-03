@@ -1,20 +1,20 @@
+#define _USE_MATH_DEFINES
+
 #include "Particle.hpp"
 
+#include <cmath>
 #include <random>
 
 namespace pfe {
 
-Particle::Particle() {
+Particle::Particle() : m_x{0}, m_y{0} {
   // https://docs.microsoft.com/en-us/cpp/standard-library/random?view=msvc-160
   std::random_device rand_dev;
   std::mt19937 mt_seed(rand_dev());
-  std::uniform_real_distribution<double> dist(-1.0, 1.0);
+  std::uniform_real_distribution<double> dist(0, 1.0);
 
-  m_x = dist(mt_seed);
-  m_y = dist(mt_seed);
-
-  m_xspeed = 0.01 * dist(mt_seed);
-  m_yspeed = 0.01 * dist(mt_seed);
+  m_direction = 2 * M_PI * dist(mt_seed);
+  m_speed = 0.01 * dist(mt_seed);
 }
 
 Particle::~Particle() {}
@@ -24,16 +24,10 @@ void Particle::UpdateParticlePos() {
   std::mt19937 mt_seed(rand_dev());
   std::uniform_real_distribution<double> dist(-1.0, 1.0);
 
-  m_x += m_xspeed;
-  m_y += m_yspeed;
+  double xspeed = m_speed * cos(m_direction);
+  double yspeed = m_speed * sin(m_direction);
 
-  if (m_x < -1.0 || m_x >= 1.0) {
-    m_xspeed = -m_xspeed;
-  }
-
-  if (m_y < -1.0 || m_y >= 1.0) {
-    m_yspeed = -m_yspeed;
-  }
+  m_x += xspeed;
+  m_y += yspeed;
 }
-
 }  // namespace pfe
