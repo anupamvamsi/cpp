@@ -29,6 +29,10 @@ int main(int argc, char** argv) {
     // 2a. Animate colors with sin/cos and SDL_GetTicks:
     // For particles "_p", so that PARTICLES will be different colors vs. screen
     int elapsed = SDL_GetTicks();
+
+    screen1.Clear();
+    swarm1.UpdateSwarmPos();
+
     unsigned char red_p = (1 + cos(elapsed * 0.001)) * 128;
     unsigned char green = (1 + sin(elapsed * 0.002)) * 128;
     unsigned char blue_p = (1 + cos(elapsed * 0.003)) * 128;

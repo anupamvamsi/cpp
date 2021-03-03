@@ -10,10 +10,14 @@ class Particle {
  public:  // members
   double m_x;
   double m_y;
+  double m_xspeed;
+  double m_yspeed;
 
  public:  // methods
   Particle();
   virtual ~Particle();
+
+  void UpdateParticlePos();
 };
 
 }  // namespace pfe

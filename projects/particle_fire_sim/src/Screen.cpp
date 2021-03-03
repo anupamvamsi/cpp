@@ -114,6 +114,10 @@ bool Screen::ProcessEvent() {
   return true;
 }
 
+void Screen::Clear() {
+  memset(m_buffer, 0x0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+}
+
 void Screen::Close() {
   delete[] m_buffer;
   SDL_DestroyRenderer(m_renderer);

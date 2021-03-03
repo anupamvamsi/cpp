@@ -17,6 +17,7 @@ class Swarm {
   virtual ~Swarm();
 
   const Particle* const GetParticles() { return m_ptr_arr_to_Particle_Objects; }
+  void UpdateSwarmPos();
 };
 
 }  // namespace pfe
