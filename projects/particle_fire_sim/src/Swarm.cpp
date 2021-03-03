@@ -16,6 +16,8 @@ void Swarm::UpdateSwarmPos(int elapsed) {
   for (int i{0}; i < Swarm::N_PARTICLES; i++) {
     m_ptr_arr_to_Particle_Objects[i].UpdateParticlePos(time_interval);
   }
+
+  last_time = elapsed;  // missed this!!
 }
 
 }  // namespace pfe
