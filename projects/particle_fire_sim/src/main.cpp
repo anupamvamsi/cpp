@@ -30,7 +30,6 @@ int main(int argc, char** argv) {
     // For particles "_p", so that PARTICLES will be different colors vs. screen
     int elapsed = SDL_GetTicks();
 
-    screen1.Clear();
     swarm1.UpdateSwarmPos(elapsed);
 
     unsigned char red_p = (1 + cos(elapsed * 0.001)) * 128;
