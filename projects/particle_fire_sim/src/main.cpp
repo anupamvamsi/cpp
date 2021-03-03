@@ -32,9 +32,9 @@ int main(int argc, char** argv) {
 
     swarm1.UpdateSwarmPos(elapsed);
 
-    unsigned char red_p = (1 + cos(elapsed * 0.001)) * 128;
-    unsigned char green = (1 + sin(elapsed * 0.002)) * 128;
-    unsigned char blue_p = (1 + cos(elapsed * 0.003)) * 128;
+    unsigned char red_p = (1 + cos(elapsed * 0.0001)) * 128;
+    unsigned char green = (1 + sin(elapsed * 0.0002)) * 128;
+    unsigned char blue_p = (1 + cos(elapsed * 0.0003)) * 128;
 
     // For screen "_s", so that SCREEN will be a different color vs. particles
     // unsigned char red_s = (1 + sin(elapsed * 0.00005)) * 128;
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
       int y = (ptr_to_particle_obj.m_y * pfe::Screen::SCREEN_WIDTH / 2) +
               (pfe::Screen::SCREEN_HEIGHT / 2);
 
-      screen1.SetPixel(x, y, red_p, green, blue_p, 0);
+      screen1.SetPixel(x, y, red_p, green, blue_p, 255);
     }
 
     screen1.BoxBlur();

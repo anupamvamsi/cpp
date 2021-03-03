@@ -7,16 +7,20 @@
 namespace pfe {
 
 class Particle {
+ private:
+  double m_speed;
+  double m_direction;
+
+ private:
+  void Init();
+
  public:  // members
   double m_x;
   double m_y;
-  double m_speed;
-  double m_direction;
 
  public:  // methods
   Particle();
   virtual ~Particle();
-
   void UpdateParticlePos(int time_interval);
 };
 
