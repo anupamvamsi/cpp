@@ -10,7 +10,8 @@ class Screen {
   SDL_Window* m_window;
   SDL_Renderer* m_renderer;
   SDL_Texture* m_texture;
-  Uint32* m_buffer;
+  Uint32* m_buffer1;
+  Uint32* m_buffer2;
 
  public:  // members
   static const int SCREEN_WIDTH = 800;
@@ -22,6 +23,7 @@ class Screen {
   void UpdateScreen();
   void SetPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
   bool ProcessEvent();
+  void BoxBlur();
   void Clear();
   void Close();
 };

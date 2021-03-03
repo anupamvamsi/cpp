@@ -10,7 +10,8 @@ Screen::Screen()
     : m_window{nullptr},
       m_renderer{nullptr},
       m_texture{nullptr},
-      m_buffer{nullptr} {}
+      m_buffer1{nullptr},
+      m_buffer2{nullptr} {}
 
 bool Screen::Init() {
   bool success = true, error = false;
@@ -50,7 +51,8 @@ bool Screen::Init() {
   }
 
   // Array of screen pixels stored in a buffer (w x h)
-  m_buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+  m_buffer1 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+  m_buffer2 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
   /*  FUTURE WORK:
 
       ADD AN EXCEPTION FOR ERROR HANDLING
@@ -59,18 +61,14 @@ bool Screen::Init() {
   */
 
   // Set the memory of the buffer
-  memset(m_buffer, 0x128, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
-
-  for (int i{0}; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
-    m_buffer[i] = 0x00000000;  // set each pixel
-  }
+  memset(m_buffer1, 0x0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
 
   return success;
 }
 
 void Screen::UpdateScreen() {
   // Pitch = The number of bytes b/w rows of pixel data (w x sizeof(Uint32))
-  SDL_UpdateTexture(m_texture, nullptr, m_buffer,
+  SDL_UpdateTexture(m_texture, nullptr, m_buffer1,
                     SCREEN_WIDTH * sizeof(Uint32));
   SDL_RenderClear(m_renderer);
   SDL_RenderCopy(m_renderer, m_texture, nullptr, nullptr);
@@ -98,7 +96,7 @@ void Screen::SetPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue,
   color += alpha;  // controls transparency
 
   // Update the colors buffer
-  m_buffer[(y * SCREEN_WIDTH) + x] = color;
+  m_buffer1[(y * SCREEN_WIDTH) + x] = color;
 }
 
 bool Screen::ProcessEvent() {
@@ -114,12 +112,58 @@ bool Screen::ProcessEvent() {
   return true;
 }
 
-void Screen::Clear() {
-  memset(m_buffer, 0x0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+void Screen::BoxBlur() {
+  // Swap the buffers:
+  // We are drawing to buffer1, and,
+  // pixels are in buffer2
+  Uint32* temp_buffer = m_buffer1;
+  m_buffer1 = m_buffer2;
+  m_buffer2 = temp_buffer;
+
+  for (int y{0}; y < SCREEN_HEIGHT; y++) {
+    for (int x{0}; x < SCREEN_WIDTH; x++) {
+      /*
+      // take avg of all 9 and redraw
+        0 0 0
+        0 1 0
+        0 0 0
+      */
+      int r_total = 0;
+      int g_total = 0;
+      int b_total = 0;
+
+      for (int row{-1}; row < 2; row++) {
+        for (int col{-1}; col < 2; col++) {
+          int current_x = x + col;
+          int current_y = y + row;
+
+          if (current_x > -1 && current_x < SCREEN_WIDTH && current_y > -1 &&
+              current_y < SCREEN_HEIGHT) {
+            Uint32 color = m_buffer2[(current_y * SCREEN_WIDTH) + current_x];
+
+            Uint8 red = color >> 24;
+            Uint8 green = color >> 16;
+            Uint8 blue = color >> 8;
+
+            r_total += red;
+            g_total += green;
+            b_total += blue;
+          }
+        }
+      }
+
+      Uint8 r = r_total / 9;
+      Uint8 g = g_total / 9;
+      Uint8 b = b_total / 9;
+
+      SetPixel(x, y, r, g, b, 0);
+    }
+  }
 }
 
 void Screen::Close() {
-  delete[] m_buffer;
+  delete[] m_buffer1;
+  delete[] m_buffer2;
   SDL_DestroyRenderer(m_renderer);
   SDL_DestroyTexture(m_texture);
   SDL_DestroyWindow(m_window);
