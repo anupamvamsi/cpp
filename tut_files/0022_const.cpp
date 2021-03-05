@@ -45,8 +45,8 @@ int main() {
   std::cout << "----------------------" << std::endl;
   std::cout << "VERSION: const Animal* const ptr:\n";
   const Animal* const p_3 = &animal1;
-  // Not possible because p_2 is const pointer:
-  // p_2 = &animal3;
+  // Not possible because p_3 is const pointer:
+  // p_3 = &animal3;
   // Not possible because animal1 is const object:
   // (*p_3).SetName("Yembudi");
   (*p_3).Speak();
