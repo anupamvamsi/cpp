@@ -1,5 +1,6 @@
 #include <iostream>
-#include "utils.h"
+
+#include "utils.hpp"
 
 using namespace std;
 
@@ -7,57 +8,49 @@ using namespace std;
 // void printHello();
 
 // WRITING A FUNCTION
-void showMenu()
-{
-    cout << "1. Search" << endl;
-    cout << "2. View Record" << endl;
-    cout << "3. Quit" << endl;
+void showMenu() {
+  cout << "1. Search" << endl;
+  cout << "2. View Record" << endl;
+  cout << "3. Quit" << endl;
 }
 
 // RETURNING VALUES
-int getInput()
-{
-    cout << "Enter selection: " << endl;
+int getInput() {
+  cout << "Enter selection: " << endl;
 
-    int input; // scope of input is only within the function
-    cin >> input;
+  int input;  // scope of input is only within the function
+  cin >> input;
 
-    return input;
+  return input;
 }
 
 // PASSING PARAMETERS
-void processSelection(int dummy)
-{
-    switch (dummy)
-    {
+void processSelection(int dummy) {
+  switch (dummy) {
     case 1:
-        cout << "Searching..." << endl;
-        break;
+      cout << "Searching..." << endl;
+      break;
     case 2:
-        cout << "Viewing..." << endl;
-        break;
+      cout << "Viewing..." << endl;
+      break;
     case 3:
-        cout << "Quitting..." << endl;
-        break;
+      cout << "Quitting..." << endl;
+      break;
     default:
-        cout << "Please select an item from the menu." << endl;
-    }
+      cout << "Please select an item from the menu." << endl;
+  }
 }
 
 // MAIN FUNCTION
-int main()
-{
-    showMenu();
-    int selection = getInput();
+int main() {
+  showMenu();
+  int selection = getInput();
 
-    processSelection(selection);
-    printHello();
+  processSelection(selection);
+  printHello();
 
-    return 0;    
+  return 0;
 }
 
 // DEFINING FUNCTIONS AFTER "main()" FUNCTION
-void printHello()
-{
-    cout << "Hello! :D" << endl;
-}
+void printHello() { cout << "Hello! :D" << endl; }
