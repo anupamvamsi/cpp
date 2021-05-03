@@ -55,8 +55,8 @@ int main()
 
     int curr_hg_sum = 0; // hg = hourglass
 
-    // BUG: did not initialize 'max_idx' to 0
-    // Seg fault occurs when the following test case is run:
+    // BUG FIXED: Initialized 'max_idx' to 0
+    // Seg fault NO LONGER occurs when the following test case is run:
     // Input 2D array:
     /*
      * 1 1 1 0 0 0
@@ -66,7 +66,7 @@ int main()
      * 0 0 0 0 0 0
      * 0 0 0 0 0 0
     */
-    int max = 0, max_idx, count = 0;
+    int max = 0, max_idx = 0, count = 0;
     std::vector<int> hg_sums;
 
     for (int r = 0; r < arr.size(); r++)
@@ -107,19 +107,19 @@ int main()
     }
 
     // Following two statements + loop will help you realize the bug
-    PrintTwoDVec(hgs);
-    std::cout << "\nMax Idx: " << max_idx << " | Max sum: " << max << "\n";
-    for (int element : hg_sums)
-    {
-        std::cout << element << " ";
-    }
-    std::cout << "\n";
+    // PrintTwoDVec(hgs);
+    // std::cout << "\nMax Idx: " << max_idx << " | Max sum: " << max << "\n";
+    // for (int element : hg_sums)
+    // {
+    //     std::cout << element << " ";
+    // }
+    // std::cout << "\n";
 
-    // std::cout << "The hour glass that has the max sum:\n";
-    // PrintHourGlassMax(max_idx, hgs);
+    std::cout << "The hour glass that has the max sum:\n";
+    PrintHourGlassMax(max_idx, hgs);
 
-    // std::cout << "\nMax sum among all the hourglasses in the 2D array: ";
-    // std::cout << hg_sums[max_idx] << "\nMax index: " << max_idx << std::endl;
+    std::cout << "\nMax sum among all the hourglasses in the 2D array: ";
+    std::cout << hg_sums[max_idx] << "\nMax index: " << max_idx << std::endl;
 
     return 0;
 }
