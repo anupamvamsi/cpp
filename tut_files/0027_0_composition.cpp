@@ -30,7 +30,7 @@ class Creature {
 
  public:
   Creature(const std::string& name, const Point& locn)
-      : m_name{name}, locn{m_location} {}
+      : m_name{name}, m_location{locn} {}
 
   friend std::ostream& operator<<(std::ostream& out, const Creature& creature) {
     out << creature.m_name << " is at Point " << creature.m_location;
@@ -44,7 +44,7 @@ int main() {
   std::cout << "Enter creature name >> ";
   std::string name;
   std::cin >> name;
-  Creature creature{name, (12, 4)};
+  Creature creature{name, {12, 4}};
 
   while (true) {
     std::cout << creature << "\n";
