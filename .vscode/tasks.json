@@ -17,35 +17,49 @@
 			"problemMatcher": [
 				"$gcc"
 			],
+			"group": "build",
+			"detail": "compiler: \"C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe\""
+		},
+		{
+			"type": "shell",
+			"label": "LINUX: g++.exe (v9.3) BUILD ACTIVE (C/C++) FILE",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "/usr/bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
 			"group": {
 				"kind": "build",
 				"isDefault": true
+			}
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: cl.exe MSVC COMPILER: BUILD ACTIVE FILE",
+			"command": "cl.exe",
+			"args": [ // compiler options
+				"/Zi", // creates obj and pdb files?
+				"/EHsc", // exception handling model
+				"/Fe:", // name exe file
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"${file}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
 			},
-			"detail": "compiler: \"C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe\""
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"detail": "compiler: cl.exe"
 		}
-		//,
-		// {
-		// 	"type": "cppbuild",
-		// 	"label": "C/C++: cl.exe MSVC COMPILER: BUILD ACTIVE FILE",
-		// 	"command": "cl.exe",
-		// 	"args": [ // compiler options
-		// 		"/Zi", // creates obj and pdb files?
-		// 		"/EHsc", // exception handling model
-		// 		"/Fe:", // name exe file
-		// 		"${fileDirname}\\${fileBasenameNoExtension}.exe",
-		// 		"${file}"
-		// 	],
-		// 	"options": {
-		// 		"cwd": "${workspaceFolder}"
-		// 	},
-		// 	"problemMatcher": [
-		// 		"$msCompile"
-		// 	],
-		// 	"group": {
-		// 		"kind": "build",
-		// 		"isDefault": true
-		// 	},
-		// 	"detail": "compiler: cl.exe"
-		// }
 	]
 }
