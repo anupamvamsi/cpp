@@ -62,7 +62,7 @@ int main() {
 
   /* When it is non-const string -> " std::reference_wrapper<std::string> "
 
-    for (std::reference_wrapper<const std::string> name : names) {
+    for (std::reference_wrapper<std::string> name : names) {
       name.get() += " Trillipi";
     }
 
