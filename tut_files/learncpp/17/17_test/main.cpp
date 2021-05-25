@@ -9,11 +9,7 @@ int main() {
   Player p;
   p.CreatePlayer();
 
-  Monster m1{Monster::Type::Dragon};
-  Monster m2{Monster::Type::Orc};
-  Monster m3{Monster::Type::Slime};
-
-  Monster m4{Monster::GetRandomMonster()};
+  Monster m{Monster::GetRandomMonster()};
 
   return 0;
 }

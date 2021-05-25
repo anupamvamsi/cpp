@@ -29,9 +29,13 @@ const Creature& Monster::GetDefaultCreature(Type monster_type) {
   static std::array<Creature, static_cast<std::size_t>(Type::max_types)>
       MonsterData{
           //
-          {{"Dragon", 'D', 20, 4, 100},
+          {{"Dragon", 'D', 20, 9, 100},
            {"Orc", 'O', 4, 2, 25},
-           {"Slime", 'S', 1, 1, 10}}
+           {"Slime", 'S', 1, 1, 10},
+           {"Leprechaun", 'L', 7, 4, 1000},
+           {"Snagli", 'I', 9, 2, 50},
+           {"Cockroach", 'C', 15, 0, 0},
+           {"Pigeon", 'P', 2, 1, 500}}
           /**/
       };
 

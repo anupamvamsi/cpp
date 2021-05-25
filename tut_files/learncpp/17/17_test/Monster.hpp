@@ -8,6 +8,10 @@ class Monster : public Creature {
     Dragon,
     Orc,
     Slime,
+    Leprechaun,
+    Snagli,
+    Cockroach,
+    Pigeon,
     max_types
   };
 
