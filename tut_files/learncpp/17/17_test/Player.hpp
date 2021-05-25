@@ -10,8 +10,10 @@ class Player : public Creature {
   int m_level{1};
 
  public:
+  Player();
   Player(const std::string& name);
 
+  Player* CreatePlayer();
   int GetLevel();
   void LevelUp();
   bool HasWon();

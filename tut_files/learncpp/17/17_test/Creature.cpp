@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+Creature::Creature() {}
+
 Creature::Creature(const std::string& name, char symbol, int health, int damage,
                    int gold)
     : m_name{name},

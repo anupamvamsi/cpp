@@ -12,6 +12,7 @@ class Creature {
   int m_gold;
 
  public:
+  Creature();
   Creature(const std::string& name, char symbol, int health, int damage,
            int gold);
 
