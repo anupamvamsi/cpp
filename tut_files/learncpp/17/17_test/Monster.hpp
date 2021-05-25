@@ -12,6 +12,9 @@ class Monster : public Creature {
   };
 
   Monster(Type monster_type);
+
+  static Monster GetRandomMonster();
+
   ~Monster();
 
  private:
