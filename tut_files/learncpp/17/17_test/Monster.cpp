@@ -4,6 +4,9 @@
 #include <iostream>
 #include <random>
 
+#include "Player.hpp"
+#include "Random.hpp"
+
 Monster::Monster(Type monster_type)
     : Creature(GetDefaultCreature(monster_type)) {
   std::cout << "A " << this->GetName() << " (" << this->GetSymbol()
@@ -11,17 +14,7 @@ Monster::Monster(Type monster_type)
 }
 
 Monster Monster::GetRandomMonster() {
-  // non-deterministic generator
-  std::random_device rand_dev;
-
-  // gen() generates random nums in undefined ranges
-  std::mt19937 gen(rand_dev());
-
-  // dist(gen()) generates random nums in a range
-  std::uniform_int_distribution<int> dist(0, Monster::max_types - 1);
-
-  int rand_num = dist(gen);
-
+  int rand_num = GenerateRandomNum(0, Monster::max_types - 1);
   return Monster{static_cast<Monster::Type>(rand_num)};
 }
 

@@ -23,7 +23,7 @@ int Creature::GetGold() { return m_gold; }
 void Creature::ReduceHealth(int reduce_amount) { m_health -= reduce_amount; }
 
 bool Creature::IsDead() {
-  if (m_health <= 0) {
+  if (m_health < 1) {
     return true;
   }
 

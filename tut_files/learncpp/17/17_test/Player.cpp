@@ -4,6 +4,8 @@
 #include <string>
 
 #include "Creature.hpp"
+#include "Monster.hpp"
+#include "Random.hpp"
 
 Player::Player() {}
 
@@ -14,15 +16,22 @@ Player::Player(const std::string& name = "Player")
             << this->GetGold() << " gold.\n";
 }
 
+/* CreatePlayer()
 Player* Player::CreatePlayer() {
   std::string player_name = "";
   std::cout << "Enter your name: ";
   std::cin >> player_name;
 
   Player* player = new Player(player_name);
+  std::cout << player->GetName() << " ";
+  std::cout << player->GetSymbol() << " ";
+  std::cout << player->GetHealth() << " ";
+  std::cout << player->GetDamage() << " ";
+  std::cout << player->GetGold() << "\n\n";
 
   return player;
 }
+*/
 
 int Player::GetLevel() { return m_level; }
 
@@ -32,7 +41,7 @@ void Player::LevelUp() {
 }
 
 bool Player::HasWon() {
-  if (m_level == 20) {
+  if (m_level > 19) {
     return true;
   }
 
