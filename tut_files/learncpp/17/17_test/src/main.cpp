@@ -12,24 +12,27 @@ int main() {
   std::cin >> name;
 
   Player p{name};
+  Monster m = Monster();
 
   while (true) {
-    std::cout << p.GetName() << " ";
-    std::cout << p.GetSymbol() << " ";
-    std::cout << p.GetHealth() << " ";
-    std::cout << p.GetDamage() << " ";
-    std::cout << p.GetGold() << "\n\n";
+    if (m.IsEmpty()) {
+      std::cout << p.GetName() << " ";
+      std::cout << p.GetSymbol() << " ";
+      std::cout << p.GetHealth() << " ";
+      std::cout << p.GetDamage() << " ";
+      std::cout << p.GetGold() << "\n\n";
 
-    Monster m{Monster::GetRandomMonster()};
+      m = Monster::GetRandomMonster();
+    }
 
     bool stop = FightMonster(p, m);
 
     if (stop) {
+      m = Monster();
       if (!PlayAgain(p)) {
         break;
       }
     }
   }
-
   return 0;
 }
