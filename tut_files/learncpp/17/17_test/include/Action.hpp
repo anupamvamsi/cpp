@@ -8,3 +8,4 @@ void AttackMonster(Player& p, Monster& m);
 void AttackPlayer(Player& p, Monster& m);
 void HasLost(Player& p);
 void MonsterDead(Player& p, Monster& m);
+bool PlayAgain(Player& p);

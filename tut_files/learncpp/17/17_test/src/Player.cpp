@@ -48,6 +48,13 @@ bool Player::HasWon() {
   return false;
 }
 
+void Player::ResetStats() {
+  m_health = 10;
+  m_damage = 1;
+  m_gold = 0;
+  m_level = 1;
+}
+
 Player::~Player() {
   std::cout << "Player " << this->GetName() << " has exited the game.\n";
 }

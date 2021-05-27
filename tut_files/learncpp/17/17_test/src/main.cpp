@@ -7,7 +7,11 @@
 #include "Player.hpp"
 
 int main() {
-  Player p{"Pum"};
+  std::string name;
+  std::cout << "Enter your Player name: ";
+  std::cin >> name;
+
+  Player p{name};
 
   while (true) {
     std::cout << p.GetName() << " ";
@@ -21,7 +25,9 @@ int main() {
     bool stop = FightMonster(p, m);
 
     if (stop) {
-      break;
+      if (!PlayAgain(p)) {
+        break;
+      }
     }
   }
 

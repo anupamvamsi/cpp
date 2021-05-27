@@ -98,7 +98,7 @@ void AttackPlayer(Player& p, Monster& m) {
 }
 
 void HasLost(Player& p) {
-  std::cout << "You lost at Level " << p.GetLevel() << " and with "
+  std::cout << "\nYou lost at Level " << p.GetLevel() << " and with "
             << p.GetGold() << " gold. Too bad, try again, maybe!\n";
 }
 
@@ -109,4 +109,18 @@ void MonsterDead(Player& p, Monster& m) {
   std::cout << "You killed the " << m.GetName() << ".\n";
   std::cout << "You are now Level " << p.GetLevel() << ".\n";
   std::cout << "You found " << m.GetGold() << " gold.\n\n";
+}
+
+bool PlayAgain(Player& p) {
+  std::cout << "[R]estart game or [E]xit? ";
+  char choice;
+  std::cin >> choice;
+  choice = std::tolower(choice, std::locale());
+
+  if (choice == 'r') {
+    p.ResetStats();
+    return true;
+  } else {
+    return false;
+  }
 }
