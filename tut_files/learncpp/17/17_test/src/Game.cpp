@@ -17,7 +17,7 @@ bool Game::PlayGame() {
     this->m = Monster::GetRandomMonster();
   }
 
-  if (this->FightMonster()) {
+  if (!this->FightMonster()) {
     return this->PlayAgain();
   }
   return true;
@@ -52,7 +52,7 @@ bool Game::FightMonster() {
   if (choice == 'r') {     // Choice Run
     if (Game::TryRun()) {  // Run success
       this->m.EmptyMonster();
-      return false;
+      return true;
     }
 
     else {  // Run failed
@@ -60,10 +60,10 @@ bool Game::FightMonster() {
 
       if (this->p.IsDead()) {  // Player Dead
         this->HasLost();
-        return true;
+        return false;
       }
 
-      return false;
+      return true;
     }
   }
 
@@ -75,11 +75,11 @@ bool Game::FightMonster() {
 
       if (this->p.HasWon()) {  // Level is now 20
         std::cout << "You win! You have " << this->p.GetGold() << " gold!\n";
-        return true;
+        return false;
       }
 
       // Level not yet 20
-      return false;
+      return true;
     }
 
     // Monster Alive
@@ -87,12 +87,12 @@ bool Game::FightMonster() {
 
     if (this->p.IsDead()) {  // Player Dead
       this->HasLost();
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
-  return false;
+  return true;
 }
 
 void Game::AttackMonster() {
