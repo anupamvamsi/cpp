@@ -20,5 +20,10 @@ int main() {
       break;
     }
   }
+
+  std::cout << std::flush;
+  std::cin.ignore();
+  std::cin.get();
+
   return 0;
 }

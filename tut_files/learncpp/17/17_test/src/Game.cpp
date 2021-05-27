@@ -55,16 +55,15 @@ bool Game::FightMonster() {
       return true;
     }
 
-    else {  // Run failed
-      this->AttackPlayer();
+    // Run failed
+    this->AttackPlayer();
 
-      if (this->p.IsDead()) {  // Player Dead
-        this->HasLost();
-        return false;
-      }
-
-      return true;
+    if (this->p.IsDead()) {  // Player Dead
+      this->HasLost();
+      return false;
     }
+
+    return true;
   }
 
   else if (choice == 'f') {  // Choice Fight
