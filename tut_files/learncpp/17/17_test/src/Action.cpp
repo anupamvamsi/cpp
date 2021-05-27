@@ -81,8 +81,6 @@ bool FightMonster(Player& p, Monster& m) {
       }
     }
   }
-
-  return false;
 }
 
 void AttackMonster(Player& p, Monster& m) {
