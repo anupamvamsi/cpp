@@ -11,12 +11,19 @@ Monster::Monster(Type monster_type)
     : Creature(GetDefaultCreature(monster_type)) {
   std::cout << "A " << this->GetName() << " (" << this->GetSymbol()
             << ") has appeared.\n";
+  this->empty = false;
 }
+
+Monster::Monster() { this->empty = true; }
+
+void Monster::EmptyMonster() { this->empty = true; }
 
 Monster Monster::GetRandomMonster() {
   int rand_num = GenerateRandomNum(0, Monster::max_types - 1);
   return Monster{static_cast<Monster::Type>(rand_num)};
 }
+
+bool Monster::IsEmpty() { return this->empty; }
 
 const Creature& Monster::GetDefaultCreature(Type monster_type) {
   static std::array<Creature, static_cast<std::size_t>(Type::max_types)>

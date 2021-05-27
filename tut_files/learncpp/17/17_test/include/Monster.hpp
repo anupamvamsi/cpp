@@ -16,11 +16,15 @@ class Monster : public Creature {
   };
 
   Monster(Type monster_type);
+  Monster();
 
   static Monster GetRandomMonster();
+  void EmptyMonster();
+  bool IsEmpty();
 
   ~Monster();
 
  private:
   static const Creature& GetDefaultCreature(Type default_monster);
+  bool empty;
 };

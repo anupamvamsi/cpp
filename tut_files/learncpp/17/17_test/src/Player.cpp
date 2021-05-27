@@ -33,6 +33,14 @@ Player* Player::CreatePlayer() {
 }
 */
 
+void Player::PrintStats() {
+  std::cout << this->GetName() << " ";
+  std::cout << this->GetSymbol() << " ";
+  std::cout << this->GetHealth() << " ";
+  std::cout << this->GetDamage() << " ";
+  std::cout << this->GetGold() << "\n\n";
+}
+
 int Player::GetLevel() { return m_level; }
 
 void Player::LevelUp() {

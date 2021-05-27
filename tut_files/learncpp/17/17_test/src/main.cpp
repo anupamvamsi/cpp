@@ -1,37 +1,23 @@
 #include <iostream>
 #include <string>
 
-#include "Action.hpp"
 #include "Creature.hpp"
+#include "Game.hpp"
 #include "Monster.hpp"
 #include "Player.hpp"
 
 int main() {
-  std::string name;
+  std::string playerName;
   std::cout << "Enter your Player name: ";
-  std::cin >> name;
+  std::cin >> playerName;
 
-  Player p{name};
-  Monster m = Monster();
+  Game g = Game(playerName);
 
   while (true) {
-    if (m.IsEmpty()) {
-      std::cout << p.GetName() << " ";
-      std::cout << p.GetSymbol() << " ";
-      std::cout << p.GetHealth() << " ";
-      std::cout << p.GetDamage() << " ";
-      std::cout << p.GetGold() << "\n\n";
+    bool res = g.PlayGame();
 
-      m = Monster::GetRandomMonster();
-    }
-
-    bool stop = FightMonster(p, m);
-
-    if (stop) {
-      m = Monster();
-      if (!PlayAgain(p)) {
-        break;
-      }
+    if (!res) {
+      break;
     }
   }
   return 0;

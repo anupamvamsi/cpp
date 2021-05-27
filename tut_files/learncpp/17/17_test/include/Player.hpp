@@ -18,6 +18,7 @@ class Player : public Creature {
   void LevelUp();
   bool HasWon();
   void ResetStats();
+  void PrintStats();
 
   ~Player();
 };
