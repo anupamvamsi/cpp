@@ -7,16 +7,11 @@
 #include "Random.hpp"
 
 Game::Game(const std::string& playerName) {
-  this->m = Monster();
-  this->p = Player(playerName);
+  this->p = new Player(playerName);
+  this->m = Monster::GetRandomMonster();
 }
 
 bool Game::PlayGame() {
-  if (this->m.IsEmpty()) {
-    this->p.PrintStats();
-    this->m = Monster::GetRandomMonster();
-  }
-
   if (!this->FightMonster()) {
     return this->PlayAgain();
   }
@@ -51,14 +46,14 @@ bool Game::FightMonster() {
 
   if (choice == 'r') {     // Choice Run
     if (Game::TryRun()) {  // Run success
-      this->m.EmptyMonster();
+      this->m = Monster::GetRandomMonster();
       return true;
     }
 
     // Run failed
     this->AttackPlayer();
 
-    if (this->p.IsDead()) {  // Player Dead
+    if (this->p->IsDead()) {  // Player Dead
       this->HasLost();
       return false;
     }
@@ -72,8 +67,8 @@ bool Game::FightMonster() {
     if (this->m.IsDead()) {  // Monster Dead
       this->MonsterDead();
 
-      if (this->p.HasWon()) {  // Level is now 20
-        std::cout << "You win! You have " << this->p.GetGold() << " gold!\n";
+      if (this->p->HasWon()) {  // Level is now 20
+        std::cout << "You win! You have ⛁ " << this->p->GetGold() << " gold!\n";
         return false;
       }
 
@@ -84,7 +79,7 @@ bool Game::FightMonster() {
     // Monster Alive
     this->AttackPlayer();
 
-    if (this->p.IsDead()) {  // Player Dead
+    if (this->p->IsDead()) {  // Player Dead
       this->HasLost();
       return false;
     }
@@ -95,32 +90,34 @@ bool Game::FightMonster() {
 }
 
 void Game::AttackMonster() {
-  this->m.ReduceHealth(this->p.GetDamage());
+  this->m.ReduceHealth(this->p->GetDamage());
 
   std::cout << "You hit the " << this->m.GetName() << " for "
-            << this->p.GetDamage() << " damage.\n";
+            << this->p->GetDamage() << " damage.\n";
 }
 
 void Game::AttackPlayer() {
-  this->p.ReduceHealth(this->m.GetDamage());
+  this->p->ReduceHealth(this->m.GetDamage());
 
   std::cout << "The " << this->m.GetName() << " attacked you for "
             << this->m.GetDamage() << " damage.\n";
 }
 
 void Game::HasLost() {
-  std::cout << "\nYou lost at Level " << this->p.GetLevel() << " and with "
-            << this->p.GetGold() << " gold. Too bad, try again, maybe!\n";
+  std::cout << "\nYou lost at Level " << this->p->GetLevel() << " and with "
+            << this->p->GetGold() << " gold. Too bad, try again, maybe!\n";
 }
 
 void Game::MonsterDead() {
-  this->p.AddGold(this->m.GetGold());
-  this->p.LevelUp();
+  this->p->AddGold(this->m.GetGold());
+  this->p->LevelUp();
 
   std::cout << "You killed the " << this->m.GetName() << ".\n";
-  std::cout << "You are now Level " << this->p.GetLevel() << ".\n";
-  std::cout << "You found " << this->m.GetGold() << " gold.\n\n";
-  this->m.EmptyMonster();
+  std::cout << "You are now Level " << this->p->GetLevel() << ".\n";
+  std::cout << "You found " << this->m.GetGold() << " gold.\n";
+
+  this->p->PrintStats();
+  this->m = Monster::GetRandomMonster();
 }
 
 bool Game::PlayAgain() {
@@ -130,9 +127,12 @@ bool Game::PlayAgain() {
   choice = std::tolower(choice, std::locale());
 
   if (choice == 'r') {
-    this->p.ResetStats();
-    this->m.EmptyMonster();
+    this->p->ResetStats();
+    this->p->PrintStats();
+    this->m = Monster::GetRandomMonster();
     return true;
   }
+
+  this->p->~Player();
   return false;
 }

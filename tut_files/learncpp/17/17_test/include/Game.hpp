@@ -16,5 +16,5 @@ class Game {
 
  private:
   Monster m;
-  Player p;
+  Player* p;
 };

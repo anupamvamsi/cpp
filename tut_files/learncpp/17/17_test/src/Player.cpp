@@ -12,8 +12,10 @@ Player::Player() {}
 Player::Player(const std::string& name = "Player")
     : Creature(name, '@', 10, 1, 0) {
   std::cout << "Welcome, " << name << ".\n";
-  std::cout << "You have " << this->GetHealth() << " health and are carrying "
-            << this->GetGold() << " gold.\n";
+  // std::cout << "You have " << this->GetHealth() << " health and are carrying
+  // "
+  //           << this->GetGold() << " gold.\n";
+  this->PrintStats();
 }
 
 /* CreatePlayer()
@@ -34,10 +36,11 @@ Player* Player::CreatePlayer() {
 */
 
 void Player::PrintStats() {
+  std::cout << "\n";
   std::cout << this->GetName() << " ";
-  std::cout << this->GetSymbol() << " ";
-  std::cout << this->GetHealth() << " ";
-  std::cout << this->GetDamage() << " ";
+  std::cout << "(" << this->GetSymbol() << ") | ♥ ";
+  std::cout << this->GetHealth() << " | ! ";
+  std::cout << this->GetDamage() << " | ⛁ ";
   std::cout << this->GetGold() << "\n\n";
 }
 
