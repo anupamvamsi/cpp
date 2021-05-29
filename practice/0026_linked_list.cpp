@@ -31,6 +31,26 @@ class LinkedList {
     return head;
   }
 
+  Node* Insert(Node* head, int data, int index) {
+    int count = 1;
+
+    Node* temp_node = head;
+    while (true) {
+      temp_node = temp_node->m_next;
+      count++;
+
+      if (count == index) {
+        break;
+      }
+    }
+
+    Node* temp_loc = temp_node->m_next;
+    temp_node->m_next = new Node(data);
+    temp_node->m_next->m_next = temp_loc;
+
+    return head;
+  }
+
   void Display(Node* head) {
     Node* start = head;
 
@@ -57,6 +77,10 @@ int main() {
   }
 
   std::cout << "Head: " << head << std::endl;
+  list.Display(head);
+
+  std::cin >> data;
+  list.Insert(head, data, 2);
   list.Display(head);
 }
 
