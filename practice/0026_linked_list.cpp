@@ -8,7 +8,7 @@ class Node {
  public:
   Node(int d) : m_data{d}, m_next{nullptr} {}
 
-  ~Node() {}
+  ~Node() { std::cout << "Node deleted.\n"; }
 };
 
 class LinkedList {
@@ -16,18 +16,18 @@ class LinkedList {
   Node* Insert(Node* head, int data) {
     if (head == nullptr) {
       head = new Node(data);
-
+      std::cout << "Created head with address " << head << ".\n";
       return head;
     }
 
     Node* temp_node = head;
     while (temp_node->m_next != nullptr) {  // Traversing the list until the end
                                             // to add elements at the end
-      // std::cout << temp_node << std::endl;
       temp_node = temp_node->m_next;
     }
 
     temp_node->m_next = new Node(data);
+    std::cout << "Inserted node with address " << temp_node->m_next << ".\n";
     return head;
   }
 
@@ -48,6 +48,9 @@ class LinkedList {
     temp_node->m_next = new Node(data);
     temp_node->m_next->m_next = temp_loc;
 
+    std::cout << "Inserted node with address " << temp_node->m_next
+              << " @index " << index << ".\n";
+
     return head;
   }
 
@@ -60,6 +63,22 @@ class LinkedList {
     }
     std::cout << "\n";
   }
+
+  void DestroyLinkedList(Node* head) {
+    Node* temp = head;
+
+    while (head->m_next != nullptr) {
+      temp = head->m_next;
+      std::cout << "Deleting node @ " << head << ".\n";
+      delete head;
+      head = temp;
+    }
+
+    std::cout << "Deleting node @ " << head << ".\n";
+    delete head;
+  }
+
+  ~LinkedList() { std::cout << "Linked List deleted.\n"; }
 };
 
 int main() {
@@ -82,6 +101,8 @@ int main() {
   std::cin >> data;
   list.Insert(head, data, 2);
   list.Display(head);
+
+  list.DestroyLinkedList(head);
 }
 
 /*
