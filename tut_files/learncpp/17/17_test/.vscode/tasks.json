@@ -10,13 +10,20 @@
     },
     {
       "type": "cppbuild",
-      "label": "C/C++: g++ build active file",
+      "label": "LINUX: g++.exe (v9.3) BUILD ACTIVE (C/C++) FILE",
       "command": "/usr/bin/g++",
       "args": [
-        "-g",
+        "-std=c++17",
+        "-ggdb",
+        "-pedantic-errors",
+        "-Wall",
+        "-Weffc++",
+        "-Wextra",
+        "-Wsign-conversion",
+        "-Werror",
         "${file}",
         "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
+        "${fileDirname}/${fileBasenameNoExtension}.exe"
       ],
       "options": {
         "cwd": "${fileDirname}"

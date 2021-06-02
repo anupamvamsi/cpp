@@ -3,10 +3,16 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: g++.exe (v8.1) BUILD ACTIVE FILE",
+			"label": "WINDOWS: C/C++: g++.exe (v8.1) BUILD ACTIVE FILE",
 			"command": "C:\\Program Files\\mingw-w64Latest\\winlibs-x86_64-posix-seh-gcc-10.2.0-llvm-11.0.0-mingw-w64-8.0.0-r3\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-g",
+				"-pedantic-errors",
+				"-Wall",
+				"-Weffc++",
+				"-Wextra",
+				"-Wsign-conversion",
+				"-Werror",
 				"${file}",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
@@ -25,7 +31,14 @@
 			"label": "LINUX: g++.exe (v9.3) BUILD ACTIVE (C/C++) FILE",
 			"command": "/usr/bin/g++",
 			"args": [
-				"-g",
+				"-std=c++17",
+				"-ggdb",
+				"-pedantic-errors",
+				"-Wall",
+				"-Weffc++",
+				"-Wextra",
+				"-Wsign-conversion",
+				"-Werror",
 				"${file}",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.exe"

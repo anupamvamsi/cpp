@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "GCC",
+            "name": "WIN: GCC",
             "includePath": [
                 "${workspaceFolder}/**",
                 "C:\\dev\\vs_code\\libs\\SDL\\SDL2-2.0.14_dev_libs\\x86_64-w64-mingw32\\include"
@@ -61,10 +61,10 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4

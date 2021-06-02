@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "LINUX: g++.exe (gdb v8.1) - BUILD AND DEBUG ACTIVE FILE",
+            "name": "LINUX: g++.exe (gdb v9.2) - BUILD AND DEBUG ACTIVE FILE",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
@@ -23,7 +23,7 @@
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "name": "g++.exe (gdb v8.1) - BUILD AND DEBUG ACTIVE FILE",
+            "name": "WINDOWS: g++.exe (gdb v8.1) - BUILD AND DEBUG ACTIVE FILE",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
@@ -41,7 +41,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++.exe (v8.1) BUILD ACTIVE FILE"
+            "preLaunchTask": "WINDOWS: C/C++: g++.exe (v8.1) BUILD ACTIVE FILE"
         }
     ]
 }
