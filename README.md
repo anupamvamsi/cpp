@@ -1,8 +1,9 @@
 # 🗄️ cpp
 A collection of my personal tutorial files while learning Cpp. As an overview, this repository consists of:
-* 📁[ .vscode](#📁[.vscode]) : Contains vscode's cpp configuration that I use.  
-* 📁[ projects](#📁[projects])  : Contains projects made in cpp.
+* 📁[ .vscode](#📁[.vscode]) : Contains vscode's cpp configuration that I use.
+* 📁[ data_structures](#📁[data_structures]) : Practice codes for different data structures.  
 * 📁[ practice](#📁[practice]) : Contains codes written for practice.
+* 📁[ projects](#📁[projects])  : Contains projects made in cpp.
 * 📁[ tut_files](#📁[tut_files]) : Contains all the code written while following various tutorials on the internet.
 
 ## 🔗 Resources
@@ -26,16 +27,19 @@ The following resources I have found useful for my learning. I might have missed
 * [settings.json](https://github.com/anupamvamsi/cpp/blob/master/.vscode/settings.json) : Contains general settings.
 * [tasks.json](https://github.com/anupamvamsi/cpp/blob/master/.vscode/tasks.json) : Contains the build task for an active file.
 
+### 📁[ data_structures](https://github.com/anupamvamsi/cpp/tree/master/data_structures)
+
+### 📂[ practice](https://github.com/anupamvamsi/cpp/tree/master/practice)
+
 ### 📂[ projects](https://github.com/anupamvamsi/cpp/tree/master/projects)
 Each project contains a separate .vscode setting.
 * 📁[ particle_fire_sim](https://github.com/anupamvamsi/cpp/tree/master/projects/particle_fire_sim)  : Particle Fire Explosion, built using SDL and C++ as a part of John Purcell's caveofprogramming [C++ course](https://caveofprogramming.teachable.com/p/c-beginners).
 * 📁[ calcur_app](https://github.com/anupamvamsi/cpp/tree/master/projects/calcur_app)  : A guessing game, built as part of [the YouTube tutorial](https://www.youtube.com/watch?v=_bYFu9mBnr4) by [Caleb Curry](https://www.youtube.com/channel/UCZUyPT9DkJWmS_DzdOi7RIA).
 
-### 📂[ practice](https://github.com/anupamvamsi/cpp/tree/master/practice)
-
 ### 📂[ tut_files](https://github.com/anupamvamsi/cpp/tree/master/tut_files)
 #### Tutorial files consist of the following:
+* 📁[ 0001_32_basics](https://github.com/anupamvamsi/cpp/tree/master/tut_files/0001_32_basics)
 * 📁[ 0018_pointers](https://github.com/anupamvamsi/cpp/tree/master/tut_files/0018_pointers)
 * 📁[ 0019_classes](https://github.com/anupamvamsi/cpp/tree/master/tut_files/0019_classes)
 * 📁[ 0026_namespaces](https://github.com/anupamvamsi/cpp/tree/master/tut_files/0026_namespaces)
-* 📁[ learncpp (switch to learncpp branch)](https://github.com/anupamvamsi/cpp/tree/learncpp/tut_files/learncpp)
+* 📁[ learncpp](https://github.com/anupamvamsi/cpp/tree/master/tut_files/learncpp)
