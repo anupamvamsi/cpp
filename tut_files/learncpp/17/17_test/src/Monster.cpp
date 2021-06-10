@@ -19,7 +19,8 @@ Monster::Monster() { this->empty = true; }
 void Monster::EmptyMonster() { this->empty = true; }
 
 Monster Monster::GetRandomMonster() {
-  int rand_num = GenerateRandomNum(0, Monster::max_types - 1);
+  int rand_num =
+      GenerateRandomNum(0, static_cast<int>(Monster::Type::max_types) - 1);
   return Monster{static_cast<Monster::Type>(rand_num)};
 }
 

@@ -4,7 +4,7 @@
 
 class Monster : public Creature {
  public:
-  enum Type {  //
+  enum class Type {  //
     Dragon,
     Orc,
     Slime,
