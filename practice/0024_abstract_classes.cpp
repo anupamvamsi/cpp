@@ -29,7 +29,9 @@ class MyBook final : public Book {  // declared as final to prevent further
       : Book(title, author), m_price{price} {}
 
   // Doesn't need "virtual" specifier, but it is good practice to indicate it
-  virtual void Display() {
+  // Also good practice to include the "override" specifier to make debugging
+  // easier in case of errors in the program.
+  virtual void Display() override {
     std::cout << "Title: " << this->m_title << "\n";
     std::cout << "Author: " << this->m_author << "\n";
     std::cout << "Price: " << this->m_price << "\n";
