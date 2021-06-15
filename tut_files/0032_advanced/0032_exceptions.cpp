@@ -20,7 +20,7 @@ void errorDetector() {
     throw std::string{"Error: Generated with std::string."};
   }
 
-  if (error) {
+  if (!error) {
     throw 24.2890152219380724001629;
     std::cout << "This line will never be printed.\n";
   }
@@ -71,8 +71,14 @@ int main() {
 
   // If exception parameter is not going to be used in the catch block, no
   // need to include the variable name
-  catch (bool) {
-    std::cerr << "Bool error.\n";
+  // catch (bool) {
+  //   std::cerr << "Bool error.\n";
+  // }
+  // https://www.learncpp.com/cpp-tutorial/uncaught-exceptions-catch-all-handlers/
+  // To handle exceptions of unknown types, use the catch-all handler
+  // 'catch (...)':
+  catch (...) {
+    std::cerr << "Caught an error of an unknown type...\n";
   }
 
   std::cout << "Program is continuing...\n";
