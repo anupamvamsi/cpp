@@ -1,18 +1,24 @@
 // https://www.learncpp.com/cpp-tutorial/exceptions-classes-and-inheritance/
 
+#include <exception>
 #include <iostream>
 #include <string>
 
-class Exception {
+// Deriving from std::exception
+class IntArrayException : public std::exception {
  private:
   std::string m_errorMessage{};
 
  public:
-  Exception(std::string errorMessage) : m_errorMessage{errorMessage} {}
+  IntArrayException(const std::string& errorMessage)
+      : m_errorMessage{errorMessage} {}
 
-  const char* getError() const { return m_errorMessage.c_str(); }
+  // noexcept means function promises no to throw exceptions
+  /* virtual */ const char* what() const noexcept override {
+    return m_errorMessage.c_str();
+  }
 
-  ~Exception() {}
+  ~IntArrayException() {}
 };
 
 class IntArray {
@@ -26,7 +32,7 @@ class IntArray {
 
   int& operator[](const int idx) {
     if (idx < 0 || idx >= getLength()) {
-      throw Exception("[ARRAY]: Invalid index!");
+      throw IntArrayException("[ARRAY]: Invalid index!");
     }
 
     return smallArray[idx];
@@ -39,12 +45,16 @@ int main() {
   IntArray someIntArray;
 
   try {
-    int someValue{someIntArray[2]};
+    int someValue{someIntArray[20]};
     std::cout << "Value: " << someValue << "\n";
   }
 
-  catch (const Exception& e) {
-    std::cerr << "[ERROR]: " << e.getError() << "\n";
+  catch (const IntArrayException& iae) {
+    std::cerr << "[ERROR]: inherited std::exception: " << iae.what() << "\n";
+  }
+
+  catch (const std::exception& e) {
+    std::cerr << "[ERROR]: std::exception: " << e.what() << "\n";
   }
 
   return 0;
