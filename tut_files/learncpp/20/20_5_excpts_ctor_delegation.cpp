@@ -17,41 +17,41 @@ class Collection {
  private:
   int m_id{};
   Member m_stackMember{1};
-  Member* m_heapMember{};
+  Member* m_heapMember = new Member(2);
 
  public:
-  // Using try-catch block
-  Collection(int id) try
-      : m_id{id}  //
-  {
-    m_heapMember = new Member(2);
+  // Using ctor delegation
+  // https://stackoverflow.com/questions/26199431/why-did-c11-introduce-delegating-constructors
+
+  Collection() = default;
+
+  Collection(int id) : Collection() {
+    m_id = id;
 
     if (id <= 0) {
       std::cerr << "Memory address of m_heapMember (Member ID: "
                 << m_heapMember->m_memberID
                 << ") (on construction): " << m_heapMember << '\n';
-      throw "A ctor error...\n";
+      throw "\nA ctor error...\n";
     }
-  }
-
-  catch (...) {
-    std::cerr << "\nMember m_heapMember is being deleted...\n\n";
-
-    delete m_heapMember;
-
-    m_heapMember = nullptr;
-    std::cerr
-        << "Memory address of m_heapMember (Member ID: NA) (after deleting): "
-        << m_heapMember << '\n';
-    throw;
   }
 
   Collection(const Collection&) = delete;
   Collection& operator=(const Collection&) = delete;
 
   ~Collection() {
+    std::cerr << "\n~Collection() has been called, destruction in progress:\n";
+
+    std::cerr << "Member m_heapMember is being deleted...\n";
+
     delete m_heapMember;
-    std::cerr << "~Collection\n";
+    m_heapMember = nullptr;
+
+    std::cerr
+        << "Memory address of m_heapMember (Member ID: NA) (after deleting): "
+        << m_heapMember << "\n\n";
+
+    std::cerr << "Member m_stackMember is being deleted...\n";
   }
 };
 
