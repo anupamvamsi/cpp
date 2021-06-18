@@ -1,39 +1,100 @@
 // https://www.learncpp.com/cpp-tutorial/exceptions-classes-and-inheritance/
 
 #include <iostream>
+#include <memory>
 #include <vector>
+
+/* Owning and non-owning pointers:
+ * https://www.reddit.com/r/cpp_questions/comments/a0oicp/what_is_nonownership_when_related_to_pointers/
+
+ * Pointers that you use to perform 'delete' is known as an owning pointer.
+   Every other pointer to that object is known as a non-owning pointer.
+
+ * Pointers that refer to a stack object, are all non-owning because the stack
+   is responsible for freeing that memory.
+
+ * For a unique pointer, the unique pointer will free the memory when the
+   unique_ptr is freed, which itself should be on the stack. The unique pointer
+   wraps around a raw pointer so you don't forget to call delete and leak memory
+   but the idea is the same, the deletion is handled by it, therefore it owns
+   it. If you call '.get' on the unique pointer to get the raw pointer then all
+   of those are non-owning because if you ever delete one it'll end up being
+   deleted twice, which is a bug.
+
+ * Shared pointers should first of all almost never be used. If you do use them
+   the idea of ownership basically goes out the window because every shared
+   pointer could free the memory, but it would only do it once when the last
+   shared_ptr ceases to exist so you almost don't need to worry about it (as
+   long as you make sure that they are eventually all deleted, Google circular
+   reference). If you get a raw pointer from a shared_ptr that pointer is
+   considered non-owning because you'll never free the memory from it manually.
+
+ * In modern C++ raw pointers should never be owning pointers because we have
+   unique pointers to worry about deleting it for us. That said because of
+   legacy code we have to specify that a raw pointer is non-owning when we talk
+   about it rather than that being an implicit trait.
+
+ */
 
 class Member {
  public:
-  Member() { std::cerr << "Member allocated some resources\n"; }
+  int m_memberID{};
 
-  ~Member() { std::cerr << "Member cleaned up\n"; }
+ public:
+  Member(int id) : m_memberID{id} {
+    std::cerr << "Member with ID " << id
+              << " has been allocated some resources.\n";
+  }
+
+  ~Member() { std::cerr << "Member cleaned up!\n"; }
 };
 
-class X {
+class Collection {
  private:
-  int m_x{};
+  int m_id{};  // m_id is destructed on failed construction of 'Collection'
+               // object.
+
   // Memory leaks here: refs:
   // https://stackoverflow.com/questions/147572/will-the-below-code-cause-memory-leak-in-c
   // https://stackoverflow.com/questions/737653/whats-the-best-technique-for-exiting-from-a-constructor-on-an-error-condition-i
-  Member* m_member = new Member();  // members inited with 'new' not destroyed
-                                    // on failure of construction, memory leaks
-  Member m_mem{};
+  Member m_stackMember{1};  // m_stackMember is also destructed on failed
+                            // construction of 'Collection' object.
+
+  std::unique_ptr<Member> m_smartMember{std::make_unique<Member>(2)};
+
+  Member* m_heapMember{};  // m_heapMember leaks, if it is heap-allocated here,
+                           // and if construction of 'Collection' object fails.
 
  public:
-  X(int x) : m_x{x} {  // default ctor
-    if (x <= 0) {
-      // if (m_member == nullptr) {
-      std::cerr << m_member << '\n';
-      // }
-      throw 1;
+  Collection(int id) try
+      : m_id{id}  //
+  {
+    // Since m_heapMember is in a ctor try block now, if the
+    // ctor throws, then the catch-all handler will delete
+    // the leaked memory of the m_heapMember.
+    m_heapMember = new Member(3);
+
+    if (id <= 0) {
+      std::cerr << "Memory address of m_heapMember (Member ID: "
+                << m_heapMember->m_memberID
+                << ") (on construction): " << m_heapMember << '\n';
+      throw "A ctor error...\n";
     }
   }
 
-  X(const X&) = delete;
-  X& operator=(const X&) = delete;
+  catch (...) {
+    delete m_heapMember;
+    m_heapMember = nullptr;
+    std::cerr
+        << "Memory address of m_heapMember (Member ID: NA) (after deleting): "
+        << m_heapMember << '\n';
+    throw;  // Not required, implicit rethrow happens here
+  }
 
-  ~X() { std::cerr << "~X\n"; }
+  Collection(const Collection&) = delete;
+  Collection& operator=(const Collection&) = delete;
+
+  ~Collection() { std::cerr << "~Collection\n"; }
 };
 
 // https://stackoverflow.com/questions/53891985/c-weffc-warning-with-pointers
@@ -60,15 +121,13 @@ struct B {
 // Potential problems:
 // Ctor 'C()' and 'operator=(const C&)' have been implicitly deleted
 // because of 'C()' not being specified, and the reference member 'second' also
-// implicitly helps delete the assignment operator 'operator=(const B&)' of the
+// implicitly helps delete the assignment operator 'operator=(const C&)' of the
 // struct.
-std::vector<int> init_vec;
+std::vector<int> initVec;
 struct C {
   C()
-      : second{init_vec}  // inits the 'second' vector<int> reference
-  {
-    //
-  }
+      : second{initVec}  // inits the 'second' vector<int> reference
+  {}
 
   int* first = nullptr;
   std::vector<int>& second;
@@ -76,16 +135,20 @@ struct C {
 
 int main() {
   try {
-    X a{0};
-  } catch (int) {
-    std::cerr << "Oops\n";
+    Collection c{-5};
+  } catch (const char* ctorExcpt) {
+    std::cerr << ctorExcpt;
   }
 
+  std::cout << "Program is continuing...\n";
   // Errors now fixed
   C c1;
   C c2(c1);
 
+  // Will not work since the assignment operator 'operator=(const C&)'
+  // is implicitly deleted.
   // c1 = c2;
 
+  std::cout << "Exiting program.\n";
   return 0;
 }
