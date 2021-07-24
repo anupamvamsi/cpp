@@ -8,16 +8,18 @@ int main() {
     virtual const char* IDYourself() {  //
       return "BasicObject";
     }
+
+    virtual ~s_SomeBasicObject() {}  // added for better code
   };
 
   struct s_SomeSubObjA : public s_SomeBasicObject {
-    const char* IDYourself() {  //
+    virtual const char* IDYourself() override {  //
       return "SubObj A!";
     }
   };
 
   struct s_SomeSubObjB : public s_SomeBasicObject {
-    const char* IDYourself() {  //
+    virtual const char* IDYourself() override {  //
       return "SubObj B...";
     }
   };
