@@ -3,8 +3,8 @@
 
 int main() {
   struct s_BasicObject {
-    int x = 0xA3A2A1A0;
-    int y = 0xB3B2B1B0;
+    unsigned int x = 0xA3A2A1A0;
+    unsigned int y = 0xB3B2B1B0;
 
     s_BasicObject() {
       x = 0xC3C2C1C0;

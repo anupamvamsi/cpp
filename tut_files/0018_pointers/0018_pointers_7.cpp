@@ -54,7 +54,7 @@ int main() {
   auto r_3d = B;         // same as int(*q_3d)[2][4] = B;
 
   std::cout << "3-D Array: \n";
-  for (int i = 1; i <= (sizeof(B) / sizeof(***B)); i++) {
+  for (size_t i = 1; i <= (sizeof(B) / sizeof(***B)); i++) {
     std::cout << "Adr : " << (intptr_t)(**B + i - 1)
               << " | Val : " << *(**B + i - 1) << std::endl;
     if (i % 8 == 0) {
