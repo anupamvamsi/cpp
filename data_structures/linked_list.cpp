@@ -2,27 +2,35 @@
 
 class Node {
  public:
-  int m_data;
+  int m_data{};
   Node* m_next{nullptr};
 
  public:
   Node() {}
   Node(int data) : m_data{data} {}
+
+  Node(const Node&) {}
+  // https://stackoverflow.com/questions/2447696/overloading-assignment-operator-in-c
+  Node& operator=(const Node&) { return *this; }
+
   ~Node() { std::cout << "Node deleted.\n"; }
 };
 
 class LinkedList {
  private:
-  Node* m_head = nullptr;
+  Node* m_head{nullptr};
 
  public:
   LinkedList() {}
 
-  void Insert(int data) {
+  LinkedList(const LinkedList&) {}
+  LinkedList& operator=(const LinkedList&) { return *this; }
+
+  void insert(int data) {
     if (this->m_head == nullptr) {
       this->m_head = new Node(data);
-      std::cout << "Inserted head @ " << this->m_head << '\n';
-      return;  // make function stop and not execute the statements after 'if'
+      std::cout << "Inserted head (" << data << ") @ " << this->m_head << ".\n";
+      return;
     }
 
     Node* current = this->m_head;
@@ -31,95 +39,218 @@ class LinkedList {
     }
 
     current->m_next = new Node(data);  // here mistakes happen
-    std::cout << "Inserted node @ " << current->m_next << '\n';
+    std::cout << "Inserted node (" << data << ") @ " << current->m_next
+              << ".\n";
   }
 
-  void Insert(int data, int index) {
+  void insert(int data, std::size_t index) {
     Node* prev = this->m_head;
-    Node* temp;
-    int count{1};
+    Node* temp{};
+    std::size_t count{1};
 
     if (prev == nullptr) {  // if list empty
-      this->Insert(data);
+      std::cout << "As the list is empty, inserting (" << data
+                << ") at the head.\n";
+      this->insert(data);
+      return;
+    }
+
+    if (index == 0) {  // insert at head
+      temp = new Node();
+
+      temp->m_data = data;
+      temp->m_next = prev;
+
+      this->m_head = temp;
       return;
     }
 
     while (prev->m_next != nullptr) {
-      prev = prev->m_next;
-      count++;
-
       if (count == index) {
         break;
       }
+      prev = prev->m_next;
+      ++count;
     }
 
-    temp = prev->m_next;
-    prev->m_next = new Node(data);
+    if (count == index) {
+      temp = prev->m_next;
+      prev->m_next = new Node(data);
 
-    std::cout << "Inserted node @ " << prev->m_next << '\n';
-    prev->m_next->m_next = temp;
+      std::cout << "Inserted node (" << data << ") @ index " << index << ", "
+                << prev->m_next << ".\n";
+      prev->m_next->m_next = temp;
+    } else {
+      std::cout << "Could not insert node (" << data << ") after ("
+                << prev->m_data << ") @ " << prev
+                << " as the index at which it is to be inserted (" << index
+                << ") is invalid in relation to the size of the list.\n";
+    }
   }
 
-  void Print() {
+  void remove(std::size_t index) {
+    Node* current{this->m_head};
+    Node* prev{current};
+    std::size_t count{0};
+
+    if (current == nullptr) {
+      std::cout << "Empty array, no elements to remove at index " << index
+                << ".\n";
+      return;
+    }
+
+    if (index == 0) {
+      Node* temp{this->m_head->m_next};
+      std::cout << "Removing node (" << this->m_head->m_data << ") @ index "
+                << index << "...\n";
+      this->m_head = nullptr;
+
+      this->m_head = temp;
+
+      return;
+    }
+
+    while (current->m_next != nullptr) {
+      if (count == index) {
+        break;
+      }
+
+      prev = current;
+      current = current->m_next;
+      ++count;
+    }
+
+    if (count == index) {
+      Node* temp{prev->m_next};
+      prev->m_next = current->m_next;
+      std::cout << "Removing node (" << temp->m_data << ") @ index " << index
+                << "... ";
+      delete temp;
+      temp = nullptr;
+    } else {
+      std::cout << "Could not remove node @ index " << index
+                << " as the index at which it is to be inserted is invalid in "
+                   "relation to the size of the list.\n";
+    }
+  }
+
+  void print() {
     Node* start = this->m_head;
+
+    std::cout << "List: ";
 
     if (start == nullptr) {  // empty list
       std::cout << "{}\n";
       return;
     }
 
-    while (true) {
+    while (start->m_next != nullptr) {
       std::cout << start->m_data << " ";
+      start = start->m_next;
+    }
+    std::cout << start->m_data << " ";
 
-      if (start->m_next == nullptr) {
-        break;
-      }
+    std::cout << "\n";
+  }
 
+  std::size_t size() {
+    std::size_t length{1};
+    Node* start{this->m_head};
+
+    if (start == nullptr) {
+      return 0;
+    }
+
+    while (start->m_next != nullptr) {
+      ++length;
       start = start->m_next;
     }
 
-    std::cout << '\n';
+    return length;
   }
 
-  void DestroyLinkedList() {
+  void reverse() {
+    Node *temp{this->m_head}, *current{this->m_head}, *prev{current};
+
+    if (current == nullptr) {
+      std::cout << "Empty array, no elements to reverse.\n";
+      return;
+    }
+
+    current = current->m_next;  // move to second element
+    prev->m_next = nullptr;     // point head.next to tail
+
+    while (current != nullptr) {
+      temp = current->m_next;
+      current->m_next = prev;  // point to prev element
+
+      prev = current;
+      current = temp;
+    }
+
+    // Node* newHead{temp};
+
+    this->m_head = prev;
+    // this->m_head->m_next = nullptr;  // make head the tail
+  }
+
+  void destroyLinkedList() {
     Node* current = this->m_head;
 
+    if (current == nullptr) {
+      std::cout << "No nodes to delete to clean up the linked list.\n";
+      return;
+    }
+
     while (current->m_next != nullptr) {
-      std::cout << "Deleting node @ " << current << "... ";
+      std::cout << "Deleting node (" << current->m_data << ") @ " << current
+                << "... ";
       this->m_head = current->m_next;
       delete current;
       current = this->m_head;
     }
 
-    std::cout << "Deleting tail @ " << current << "... ";
-    delete this->m_head;
+    std::cout << "Deleting tail (" << current->m_data << ") @ " << current
+              << "... ";
+    this->m_head = nullptr;
   }
 
   ~LinkedList() {
-    this->DestroyLinkedList();
+    this->destroyLinkedList();
     std::cout << "Linked list is now deleted.\n";
+    std::cout << "Size of list: " << this->size() << "\n";
   }
 };
 
 int main() {
   LinkedList list;
-  int num_elements{0}, element{0};
+  std::size_t numElements{};
+  int element{};
 
   std::cout << "Enter number of elements needed for list: ";
-  std::cin >> num_elements;
+  std::cin >> numElements;
 
-  for (int i{0}; i < num_elements; i++) {
+  for (std::size_t i{0}; i < numElements; i++) {
     std::cout << "Enter element: ";
     std::cin >> element;
 
-    list.Insert(element);
+    list.insert(element);
   }
 
-  list.Print();
+  list.print();
+  std::cout << "Size of list: " << list.size() << "\n";
 
-  list.Insert(14, 3);
+  list.remove(3);
+  list.print();
 
-  list.Print();
+  list.insert(14, 4);
+  std::cout << "Size of list: " << list.size() << "\n";
+
+  list.print();
+
+  list.reverse();
+  std::cout << "Reversed ";
+  list.print();
 
   return 0;
 }
