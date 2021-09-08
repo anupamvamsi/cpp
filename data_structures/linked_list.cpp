@@ -26,6 +26,8 @@ class LinkedList {
   LinkedList(const LinkedList&) {}
   LinkedList& operator=(const LinkedList&) { return *this; }
 
+  Node* getHead() { return this->m_head; }
+
   void insert(int data) {
     if (this->m_head == nullptr) {
       this->m_head = new Node(data);
@@ -194,6 +196,19 @@ class LinkedList {
     // this->m_head->m_next = nullptr;  // make head the tail
   }
 
+  void recursiveReverse(Node* node) {
+    if (node->m_next == nullptr) {
+      this->m_head = node;
+      return;
+    }
+
+    recursiveReverse(node->m_next);
+
+    Node* current{node->m_next};
+    current->m_next = node;
+    node->m_next = nullptr;
+  }
+
   void destroyLinkedList() {
     Node* current = this->m_head;
 
@@ -250,6 +265,10 @@ int main() {
 
   list.reverse();
   std::cout << "Reversed ";
+  list.print();
+
+  list.recursiveReverse(list.getHead());
+  std::cout << "Recursively reversed ";
   list.print();
 
   return 0;
