@@ -44,40 +44,7 @@ int main() {
   std::forward_list<int>::iterator prev{};
   std::forward_list<int>::iterator next{};
 
-  // auto size{std::distance(sLinkedList.begin(), sLinkedList.end())};
   bool erase{false};
-
-  // for (auto i{0}; std::next(current, 1) != sLinkedList.end(); ++i) {
-  //   if (*current == *next) {
-  //     sLinkedList.erase_after(prev);
-
-  //     erase = true;
-
-  //     std::cout << "Removed : " << *current << "\t" << sLinkedList <<
-  //     "\n";
-  //   }
-
-  //   if (erase) {
-  //     erase = false;
-  //     next = std::next(prev, 1);
-  //   } else {
-  //     prev = next;
-  //     next = std::next(next, 1);
-  //   }
-
-  //   if (next == sLinkedList.end() ||
-  //       (i == size - 1 && current != sLinkedList.end())) {
-  //     i = 0;
-  //     current = std::next(current, 1);
-
-  //     if (current == sLinkedList.end()) {
-  //       break;
-  //     }
-
-  //     next = std::next(current, 1);
-  //     prev = current;
-  //   }
-  // }
 
   // No buffer used:
   while (current != sLinkedList.end()) {
