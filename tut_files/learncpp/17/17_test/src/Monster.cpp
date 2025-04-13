@@ -8,13 +8,12 @@
 #include "Random.hpp"
 
 Monster::Monster(Type monster_type)
-    : Creature(GetDefaultCreature(monster_type)) {
+    : Creature(GetDefaultCreature(monster_type)), empty{false} {
   std::cout << "A " << this->GetName() << " (" << this->GetSymbol()
             << ") has appeared.\n";
-  this->empty = false;
 }
 
-Monster::Monster() { this->empty = true; }
+Monster::Monster() : empty{true} {}
 
 void Monster::EmptyMonster() { this->empty = true; }
 
@@ -40,8 +39,7 @@ const Creature& Monster::GetDefaultCreature(Type monster_type) {
           /**/
       };
 
-  int index = static_cast<std::size_t>(monster_type);
-
+  std::size_t index = static_cast<std::size_t>(monster_type);
   return MonsterData.at(index);
 }
 

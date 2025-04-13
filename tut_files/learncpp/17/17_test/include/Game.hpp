@@ -4,6 +4,8 @@
 class Game {
  public:
   Game(const std::string& playerName);
+  Game(const Game&) = delete;  // Delete copy constructor
+  Game& operator=(const Game&) = delete;  // Delete assignment operator
   static char MakeChoice();
   static bool TryRun();
   bool FightMonster();

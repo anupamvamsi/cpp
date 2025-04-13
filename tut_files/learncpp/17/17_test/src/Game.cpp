@@ -6,10 +6,8 @@
 #include "Player.hpp"
 #include "Random.hpp"
 
-Game::Game(const std::string& playerName) {
-  this->p = new Player(playerName);
-  this->m = Monster::GetRandomMonster();
-}
+Game::Game(const std::string& playerName) 
+    : m{Monster::GetRandomMonster()}, p{new Player(playerName)} {}
 
 bool Game::PlayGame() {
   if (!this->FightMonster()) {
